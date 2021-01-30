@@ -17,7 +17,7 @@ import java.util.*;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import factura.GeneraXml2;
+import daos.GeneraXml;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 

@@ -339,7 +339,7 @@
                                               <s:if test='camp.STATUS_VENTA=="2"'>
                      <div style="position: relative; width: 90%; margin-top: 50px; margin-left: 30px; font-size: 14px; color:green; text-align: center;"><h4>¡La venta ya fue cobrada!</h4></div>
 
-                               
+                     <a href="C:\Users\gioca\Downloads\facturacion\prueba\pdf\<s:property value='camp.NO_VENTA'></s:property>.pdf" target="_blank"> <img src="img/descarga.png" style="width: 50px; margin-top: 5px;"></img> </a>
                             </s:if>
                             
                                                                                  <s:else>

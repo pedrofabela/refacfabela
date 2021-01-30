@@ -42,5 +42,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/org/tempuri"/>
         <delete dir="${build.generated.dir}/jax-wsCache/WSCFDI33"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-WSCFDI33"/>
+    <target name="wsimport-client-WSCFDI33_1" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/WSCFDI33_1"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WSCFDI33_1" destdir="${build.generated.dir}/jax-wsCache/WSCFDI33_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/WSCFDI33_1/wsdl/app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="https://app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/WSCFDI33_1/wsdl/app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/WSCFDI33_1"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/WSCFDI33_1">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-WSCFDI33_1" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/org/tempuri"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/WSCFDI33_1"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-WSCFDI33, wsimport-client-WSCFDI33_1"/>
 </project>
