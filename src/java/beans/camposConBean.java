@@ -61,7 +61,7 @@ public class camposConBean {
     private String CANTIDAD_VENTA;
     private String TOTAL_PRODUCTO_VENTA;
     private String AUX_RFC_CLIENTE;
-    private String RFCCLIENTE;     
+    private String RFCCLIENTE;
     private String ID_COTIZAPRODUCTO;
     private String NO_COTIZA;
     private String PRECIO_UNITARIO;
@@ -74,54 +74,62 @@ public class camposConBean {
     private String TOTAL_COTIZACION;
     private String NO_COTIZACION;
     private String BORRARPRODUCTO;
-    
-     private String ID_VENTA_PRODUCTO;
-private String NO_VENTA;
-private String NO_PARTE_VENTA;
-private String PRECIO_UNITARIO_VENTA;
-private String NO_PRODUCTOVENTA;
-private String PRECIO_FINAL_VENTA;
-private String RFC_CLIENTE_VENTA;
-private String STATUS_VENTA;
-private String VENDEDOR;
-private String FECHA_VENTA ; 
-private String NUEVOSTOK;
-private String CANTIDAD_TRAER;
 
-private String UBICACION;
+    private String ID_VENTA_PRODUCTO;
+    private String NO_VENTA;
+    private String NO_PARTE_VENTA;
+    private String PRECIO_UNITARIO_VENTA;
+    private String NO_PRODUCTOVENTA;
+    private String PRECIO_FINAL_VENTA;
+    private String RFC_CLIENTE_VENTA;
+    private String STATUS_VENTA;
+    private String VENDEDOR;
+    private String FECHA_VENTA;
+    private String NUEVOSTOK;
+    private String CANTIDAD_TRAER;
+    private String UBICACION;
+    private String ESTADO_VENTA;
+    private String FECHA_CONSULTA;
+    private String FECHA_INICIO;
+    private String FECHA_FINAL;
+    private String ID_ALTERNATIVO;
+    private String AUX_ALTERNATIVO;
+    private String NO_ALTERNATIVOS;
+    private String TOTAL_VENTA_DETALLE;
+    private String ENTREGA;
+    private String IVA;
+    private String DOLAR;
+    private String AGREGAR;
+    private String NAME_BODEGA;
+    private String ACTIVA_VENTA;
+    private String BODEGA_AUXILIAR;
+    private String TOTAL_PRODUCTO_BODEGAS;
+    private String CATIDAD;
+    private String ID_PRODUCTO_BORRAR;
+    private String CVE_SAT;
+    private float INCREMENTO;    
+    private String AUTORIZACION;    
+    private String RAZONSOCIAL_PROV;
+    private String RFC_PROV;
+    private String NOMBRE_PROV;
+    private String DIRECCION_PROV;
+    private String TELEFONO_PROV;
+    private String EMPRESA_PROV;
+    private String CORREO_PROV;
+    private String USUARIO;
+    private String PASSWORD;
+    private String PERFIL;
+    private String NAMEUSUARIO;
+    private String NAMEPERFIL;
 
-private String ESTADO_VENTA;
+    public String getAUTORIZACION() {
+        return AUTORIZACION;
+    }
 
-private String FECHA_CONSULTA;
-private String FECHA_INICIO;
-private String FECHA_FINAL;
-
-private String ID_ALTERNATIVO;
-private String AUX_ALTERNATIVO;
-private String NO_ALTERNATIVOS;
-
-private String TOTAL_VENTA_DETALLE;
-
-private String ENTREGA;
-
-private String IVA;
-private String DOLAR;
-
-private String AGREGAR;
-private String NAME_BODEGA;
-
-private String ACTIVA_VENTA;
-private String BODEGA_AUXILIAR;
-private String TOTAL_PRODUCTO_BODEGAS;
-private String CATIDAD;
-
-private String ID_PRODUCTO_BORRAR;
-private String CVE_SAT;
-
-private float INCREMENTO;
-
-
-
+    public void setAUTORIZACION(String AUTORIZACION) {
+        this.AUTORIZACION = AUTORIZACION;
+    }
+       
     public String getCVE_SAT() {
         return CVE_SAT;
     }
@@ -129,8 +137,6 @@ private float INCREMENTO;
     public void setCVE_SAT(String CVE_SAT) {
         this.CVE_SAT = CVE_SAT;
     }
-
-
 
     public float getINCREMENTO() {
         return INCREMENTO;
@@ -140,8 +146,6 @@ private float INCREMENTO;
         this.INCREMENTO = INCREMENTO;
     }
 
-
-
     public String getID_PRODUCTO_BORRAR() {
         return ID_PRODUCTO_BORRAR;
     }
@@ -149,10 +153,6 @@ private float INCREMENTO;
     public void setID_PRODUCTO_BORRAR(String ID_PRODUCTO_BORRAR) {
         this.ID_PRODUCTO_BORRAR = ID_PRODUCTO_BORRAR;
     }
-
-
-
-
 
     public String getCATIDAD() {
         return CATIDAD;
@@ -162,10 +162,6 @@ private float INCREMENTO;
         this.CATIDAD = CATIDAD;
     }
 
-
-
-
-
     public String getTOTAL_PRODUCTO_BODEGAS() {
         return TOTAL_PRODUCTO_BODEGAS;
     }
@@ -173,8 +169,6 @@ private float INCREMENTO;
     public void setTOTAL_PRODUCTO_BODEGAS(String TOTAL_PRODUCTO_BODEGAS) {
         this.TOTAL_PRODUCTO_BODEGAS = TOTAL_PRODUCTO_BODEGAS;
     }
-
-
 
     public String getBODEGA_AUXILIAR() {
         return BODEGA_AUXILIAR;
@@ -184,9 +178,6 @@ private float INCREMENTO;
         this.BODEGA_AUXILIAR = BODEGA_AUXILIAR;
     }
 
-
-
-
     public String getACTIVA_VENTA() {
         return ACTIVA_VENTA;
     }
@@ -194,9 +185,6 @@ private float INCREMENTO;
     public void setACTIVA_VENTA(String ACTIVA_VENTA) {
         this.ACTIVA_VENTA = ACTIVA_VENTA;
     }
-
-
-
 
     public String getNAME_BODEGA() {
         return NAME_BODEGA;
@@ -206,8 +194,6 @@ private float INCREMENTO;
         this.NAME_BODEGA = NAME_BODEGA;
     }
 
-
-
     public String getAGREGAR() {
         return AGREGAR;
     }
@@ -215,8 +201,6 @@ private float INCREMENTO;
     public void setAGREGAR(String AGREGAR) {
         this.AGREGAR = AGREGAR;
     }
-
-
 
     public String getDOLAR() {
         return DOLAR;
@@ -226,8 +210,6 @@ private float INCREMENTO;
         this.DOLAR = DOLAR;
     }
 
-
-
     public String getIVA() {
         return IVA;
     }
@@ -235,8 +217,6 @@ private float INCREMENTO;
     public void setIVA(String IVA) {
         this.IVA = IVA;
     }
-
-
 
     public String getENTREGA() {
         return ENTREGA;
@@ -246,8 +226,6 @@ private float INCREMENTO;
         this.ENTREGA = ENTREGA;
     }
 
-
-
     public String getTOTAL_VENTA_DETALLE() {
         return TOTAL_VENTA_DETALLE;
     }
@@ -255,8 +233,6 @@ private float INCREMENTO;
     public void setTOTAL_VENTA_DETALLE(String TOTAL_VENTA_DETALLE) {
         this.TOTAL_VENTA_DETALLE = TOTAL_VENTA_DETALLE;
     }
-
-
 
     public String getNO_ALTERNATIVOS() {
         return NO_ALTERNATIVOS;
@@ -266,8 +242,6 @@ private float INCREMENTO;
         this.NO_ALTERNATIVOS = NO_ALTERNATIVOS;
     }
 
-
-
     public String getAUX_ALTERNATIVO() {
         return AUX_ALTERNATIVO;
     }
@@ -276,9 +250,6 @@ private float INCREMENTO;
         this.AUX_ALTERNATIVO = AUX_ALTERNATIVO;
     }
 
-
-
-
     public String getID_ALTERNATIVO() {
         return ID_ALTERNATIVO;
     }
@@ -286,9 +257,6 @@ private float INCREMENTO;
     public void setID_ALTERNATIVO(String ID_ALTERNATIVO) {
         this.ID_ALTERNATIVO = ID_ALTERNATIVO;
     }
-
-
-
 
     public String getFECHA_CONSULTA() {
         return FECHA_CONSULTA;
@@ -314,9 +282,6 @@ private float INCREMENTO;
         this.FECHA_FINAL = FECHA_FINAL;
     }
 
-
-
-
     public String getESTADO_VENTA() {
         return ESTADO_VENTA;
     }
@@ -324,8 +289,6 @@ private float INCREMENTO;
     public void setESTADO_VENTA(String ESTADO_VENTA) {
         this.ESTADO_VENTA = ESTADO_VENTA;
     }
-
-
 
     public String getUBICACION() {
         return UBICACION;
@@ -335,12 +298,6 @@ private float INCREMENTO;
         this.UBICACION = UBICACION;
     }
 
-
-
-
-
-
-
     public String getCANTIDAD_TRAER() {
         return CANTIDAD_TRAER;
     }
@@ -349,8 +306,6 @@ private float INCREMENTO;
         this.CANTIDAD_TRAER = CANTIDAD_TRAER;
     }
 
-
-
     public String getNUEVOSTOK() {
         return NUEVOSTOK;
     }
@@ -358,8 +313,6 @@ private float INCREMENTO;
     public void setNUEVOSTOK(String NUEVOSTOK) {
         this.NUEVOSTOK = NUEVOSTOK;
     }
-
-
 
     public String getID_VENTA_PRODUCTO() {
         return ID_VENTA_PRODUCTO;
@@ -440,8 +393,6 @@ private float INCREMENTO;
     public void setFECHA_VENTA(String FECHA_VENTA) {
         this.FECHA_VENTA = FECHA_VENTA;
     }
-      
-      
 
     public String getBORRARPRODUCTO() {
         return BORRARPRODUCTO;
@@ -466,8 +417,6 @@ private float INCREMENTO;
     public void setTOTAL_COTIZACION(String TOTAL_COTIZACION) {
         this.TOTAL_COTIZACION = TOTAL_COTIZACION;
     }
-     
-     
 
     public String getAUXCOTIZA() {
         return AUXCOTIZA;
@@ -476,12 +425,7 @@ private float INCREMENTO;
     public void setAUXCOTIZA(String AUXCOTIZA) {
         this.AUXCOTIZA = AUXCOTIZA;
     }
-    
 
-     
-     
-     
-     
     public String getAUXVENTA() {
         return AUXVENTA;
     }
@@ -489,10 +433,7 @@ private float INCREMENTO;
     public void setAUXVENTA(String AUXVENTA) {
         this.AUXVENTA = AUXVENTA;
     }
-    
-    
 
-    
     public String getID_COTIZAPRODUCTO() {
         return ID_COTIZAPRODUCTO;
     }
@@ -548,9 +489,6 @@ private float INCREMENTO;
     public void setFECHA_COTIZA(String FECHA_COTIZA) {
         this.FECHA_COTIZA = FECHA_COTIZA;
     }
-    
-    
-    
 
     public String getRFCCLIENTE() {
         return RFCCLIENTE;
@@ -567,7 +505,6 @@ private float INCREMENTO;
     public void setAUX_RFC_CLIENTE(String AUX_RFC_CLIENTE) {
         this.AUX_RFC_CLIENTE = AUX_RFC_CLIENTE;
     }
-      
 
     public String getTOTAL_PRODUCTO_VENTA() {
         return TOTAL_PRODUCTO_VENTA;
@@ -577,9 +514,6 @@ private float INCREMENTO;
         this.TOTAL_PRODUCTO_VENTA = TOTAL_PRODUCTO_VENTA;
     }
 
-   
-      
-
     public String getCANTIDAD_VENTA() {
         return CANTIDAD_VENTA;
     }
@@ -587,8 +521,6 @@ private float INCREMENTO;
     public void setCANTIDAD_VENTA(String CANTIDAD_VENTA) {
         this.CANTIDAD_VENTA = CANTIDAD_VENTA;
     }
-    
-    
 
     public String getBODEGA() {
         return BODEGA;
@@ -597,8 +529,6 @@ private float INCREMENTO;
     public void setBODEGA(String BODEGA) {
         this.BODEGA = BODEGA;
     }
-    
-    
 
     public String getANAQUEL() {
         return ANAQUEL;
@@ -616,8 +546,6 @@ private float INCREMENTO;
         this.NIVEL = NIVEL;
     }
 
-    
-    
     public String getCONSULTA_PEDIDO() {
         return CONSULTA_PEDIDO;
     }
@@ -625,8 +553,7 @@ private float INCREMENTO;
     public void setCONSULTA_PEDIDO(String CONSULTA_PEDIDO) {
         this.CONSULTA_PEDIDO = CONSULTA_PEDIDO;
     }
-    
-    
+
     public String getID_PEDIDO() {
         return ID_PEDIDO;
     }
@@ -682,18 +609,7 @@ private float INCREMENTO;
     public void setCANTIDAD_LLEGADA(String CANTIDAD_LLEGADA) {
         this.CANTIDAD_LLEGADA = CANTIDAD_LLEGADA;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     private String NO_PRODUCTOS_PEDIDOS;
 
     public String getNO_PRODUCTOS_PEDIDOS() {
@@ -703,7 +619,6 @@ private float INCREMENTO;
     public void setNO_PRODUCTOS_PEDIDOS(String NO_PRODUCTOS_PEDIDOS) {
         this.NO_PRODUCTOS_PEDIDOS = NO_PRODUCTOS_PEDIDOS;
     }
-    
 
     public String getID_PRODUCT() {
         return ID_PRODUCT;
@@ -712,11 +627,7 @@ private float INCREMENTO;
     public void setID_PRODUCT(String ID_PRODUCT) {
         this.ID_PRODUCT = ID_PRODUCT;
     }
-    
-    
-    
-    
-    
+
     public String getMAX_PRODUCT() {
         return MAX_PRODUCT;
     }
@@ -740,11 +651,6 @@ private float INCREMENTO;
     public void setMAX_AUXPEDIDO(String MAX_AUXPEDIDO) {
         this.MAX_AUXPEDIDO = MAX_AUXPEDIDO;
     }
-   
-    
-    
-    
-    
 
     public String getFECHA_ACTUALIZA() {
         return FECHA_ACTUALIZA;
@@ -753,8 +659,6 @@ private float INCREMENTO;
     public void setFECHA_ACTUALIZA(String FECHA_ACTUALIZA) {
         this.FECHA_ACTUALIZA = FECHA_ACTUALIZA;
     }
-    
-    
 
     public String getPARTEAUX() {
         return PARTEAUX;
@@ -763,8 +667,6 @@ private float INCREMENTO;
     public void setPARTEAUX(String PARTEAUX) {
         this.PARTEAUX = PARTEAUX;
     }
-    
-    
 
     public String getSIMULADOR_PRECIO() {
         return SIMULADOR_PRECIO;
@@ -773,10 +675,6 @@ private float INCREMENTO;
     public void setSIMULADOR_PRECIO(String SIMULADOR_PRECIO) {
         this.SIMULADOR_PRECIO = SIMULADOR_PRECIO;
     }
-    
-    
-    
-    
 
     public String getNO_PARTE() {
         return NO_PARTE;
@@ -905,20 +803,6 @@ private float INCREMENTO;
     public void setCONSULTA_PARTE(String CONSULTA_PARTE) {
         this.CONSULTA_PARTE = CONSULTA_PARTE;
     }
-
-    private String RAZONSOCIAL_PROV;
-    private String RFC_PROV;
-    private String NOMBRE_PROV;
-    private String DIRECCION_PROV;
-    private String TELEFONO_PROV;
-    private String EMPRESA_PROV;
-    private String CORREO_PROV;
-
-    private String USUARIO;
-    private String PASSWORD;
-    private String PERFIL;
-    private String NAMEUSUARIO;
-    private String NAMEPERFIL;
 
     public String getNAMEPERFIL() {
         return NAMEPERFIL;

@@ -61,6 +61,21 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaUsuario
         list = queryForList(query, new clientesMapper());
         return list;
     }
+    
+     public String dolarCambio() throws Exception {
+        String query = "SELECT DOLAR FROM DOLAR   ";
+        // System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
+        String dolar = null;
+        dolar = queryStringUnCampo(query);
+        return dolar;
+    }
+      public String pass() throws Exception {
+        String query = "SELECT PASSWORD FROM AUTORIZACION   ";
+        // System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
+        String dolar = null;
+        dolar = queryStringUnCampo(query);
+        return dolar;
+    }
 
     public List productosGral() throws Exception {
         String query = "SELECT NO_PARTE, PRODUCTO, CATEGORIA, DESCRIPCION, PRECIO, GANANCIA, PRECIO_PESO, MARCA, UNIDADMEDIDA, MONEDA, ALTERNATIVO, RESPONSABLE, PRECIO_CAL, TOTAL_BODEGAS, PROVEEDOR, CATEGORIA_GENERAL, FECHA_ACTUALIZA, CVE_SAT FROM FINAL_PRODUCTOS WHERE TOTAL_BODEGAS='0' ";
@@ -814,6 +829,24 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaUsuario
         //Se terminan de adicionar a nuesto ArrayLis lbjos oetos
         //Ejecutar la funcion del OracleDAOFactory queryInsert
         return oraDaoFac.queryUpdate("BODEGAS", arregloCampos, Condicion);
+    }
+     public boolean actualizaTipoCambio(camposConBean camp) throws Exception {
+        //Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+        ObjPrepareStatement temporal;
+        //Constantes.enviaMensajeConsola("Entre al DAO del INSERT DATOS...................................");
+        //En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        // Integer a=Integer.parseInt(correspondencia1.getCANTI1());
+        temporal = new ObjPrepareStatement("DOLAR", "STRING", camp.getDOLAR());
+        arregloCampos.add(temporal);
+       
+
+        String Condicion;
+        Condicion = " ";
+
+        //Se terminan de adicionar a nuesto ArrayLis lbjos oetos
+        //Ejecutar la funcion del OracleDAOFactory queryInsert
+        return oraDaoFac.queryUpdate("DOLAR", arregloCampos, Condicion);
     }
 
     public boolean actualizarNoCotiza(camposConBean camp) throws Exception {

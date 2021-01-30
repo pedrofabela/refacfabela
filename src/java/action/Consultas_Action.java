@@ -1904,13 +1904,18 @@ public class Consultas_Action extends ActionSupport implements SessionAware {
             }
             ConsultaBusiness consult = new ConsultaBusiness();
         
-          
+            
+            Constantes.enviaMensajeConsola("La constraseña es:"+camp.getAUTORIZACION());
+            
+            String aut=camp.getAUTORIZACION();
+            String pass=consult.pass();
+            
+            if(pass==aut){
             consult.eliminarProducto(camp);
             consult.eliminarProductoBodegas(camp);
             consult.eliminarProductoAlternativos(camp);
             consult.eliminarProductoHist(camp);
-            consult.eliminarProductoHistIn(camp);
-            
+            consult.eliminarProductoHistIn(camp);            
             ListaHistoriaBodegas.clear();
             ListaGanancia.clear();
             ListaSelectProvee.clear();
@@ -1920,7 +1925,7 @@ public class Consultas_Action extends ActionSupport implements SessionAware {
             ListaProductoHist.clear();
             ListaBuscarProducto.clear();
             ListaBuscarProductoFinal.clear();
-             camp.setNO_PARTE("");
+            camp.setNO_PARTE("");
                 camp.setPRODUCTO("");
                 camp.setCATEGORIA("");
                 camp.setDESCRIPCION("");
@@ -1941,6 +1946,17 @@ public class Consultas_Action extends ActionSupport implements SessionAware {
             
             addFieldError("ELIMINADO","El producto fue eliminado con éxito");
             
+                
+            }
+            else{
+                
+            }
+            
+            
+            
+            
+          
+
             
 
         } catch (Exception e) {
@@ -6130,6 +6146,79 @@ try {
             System.out.println("Ocurrio un error al cerrar conexiones: " + e);
 
         }
+    }
+    
+    
+    public String tipocambio() {
+
+        try {
+            if (session.get("cveUsuario") != null) {
+                String sUsu = (String) session.get("cveUsuario");
+            } else {
+                addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+                return "SESION";
+            }
+            if (session.containsKey("usuario")) {
+                usuariocons = (usuarioBean) session.get("usuario");
+                nivelUsuario = usuariocons.getFILTRO();
+
+            } else {
+                addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+                return "SESION";
+            }
+
+          
+             ConsultaBusiness consult = new ConsultaBusiness();
+
+             String dolar="";
+
+         dolar = consult.dolarCambio();
+         camp.setDOLAR(dolar);
+
+           //System.out.println("Entre a tipo  de cambio:" );
+
+        } catch (Exception e) {
+            addActionError("Ocurrio un error: " + e);
+            return "ERROR";
+        }
+
+        return "SUCCESS";
+    }
+    
+    public String actualizatipocambio() {
+
+        try {
+            if (session.get("cveUsuario") != null) {
+                String sUsu = (String) session.get("cveUsuario");
+            } else {
+                addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+                return "SESION";
+            }
+            if (session.containsKey("usuario")) {
+                usuariocons = (usuarioBean) session.get("usuario");
+                nivelUsuario = usuariocons.getFILTRO();
+
+            } else {
+                addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+                return "SESION";
+            }
+
+          
+             ConsultaBusiness consult = new ConsultaBusiness();
+
+            consult.actualizaTipoCambio(camp);
+            
+            addFieldError("EXITO", "¡Se guardo con éxito el nuevo tipo de cambio!");
+            tipocambio();
+
+          Constantes.enviaMensajeConsola("Actuallize el tipo de cambio");
+
+        } catch (Exception e) {
+            addActionError("Ocurrio un error: " + e);
+            return "ERROR";
+        }
+
+        return "SUCCESS";
     }
    
 }

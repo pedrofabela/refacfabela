@@ -33,6 +33,15 @@ public class ConsultaBusiness {
         List lista = this.ConDAO.clientesCon();
         return lista;
     }
+     
+       public String dolarCambio() throws Exception{
+        String dolar= this.ConDAO.dolarCambio();
+        return dolar;
+    }
+        public String pass() throws Exception{
+        String dolar= this.ConDAO.pass();
+        return dolar;
+    }
       public List proveedoresCon() throws Exception{
         List lista = this.ConDAO.proveedoresCon();
         return lista;
@@ -113,6 +122,9 @@ public class ConsultaBusiness {
     }
         public boolean ActualizaBodegaStock(camposConBean camp) throws Exception {
         return ConDAO.ActualizaBodegaStock(camp);
+    }
+         public boolean actualizaTipoCambio(camposConBean camp) throws Exception {
+        return ConDAO.actualizaTipoCambio(camp);
     }
         
         public boolean actualizarNoCotiza(camposConBean camp) throws Exception {

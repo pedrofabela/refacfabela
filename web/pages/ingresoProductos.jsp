@@ -61,9 +61,14 @@
             
              var parte = document.getElementById("CONSULTA_PARTE").value;
              
+            
+             
              if(parte.length>0){
-                  document.forma.action = accion;
-            document.forma.submit();
+               
+                    document.forma.action = accion;
+                    document.forma.submit();
+              
+        
              }
              else {
                  alert("No cuenta con un número de parte, favor de colocarlo");
@@ -408,9 +413,10 @@
 
                         <div style="width: 100; text-align: center;"> <h2 style="font-size: 18px; margin-top: 40px; margin-bottom: 30px;" >¿Desea eliminar definitivamente el producto?</h2></div>
                         
+                        <div style="text-align: center;"> <s:password name="camp.AUTORIZACION" id ="AUTORIZACION" cssClass="campoFormProducto" placeholder="Contraseña"></s:password></div>
                         
 
-                        <div style="width: 100%;"> <a href="Javascript:eliminar('eliminarProducto')" onclick="this.onclick=function(){return false}"><div style="width: 120px; height: 30px; background: green; color: white; text-align: center; font-size: 16px; margin: auto; border-radius: 8px;">OK</div></a></div>
+                        <div style="width: 100%; margin-top: 20px;"> <a href="Javascript:eliminar('eliminarProducto')" onclick="this.onclick=function(){return false}"><div style="width: 120px; height: 30px; background: green; color: white; text-align: center; font-size: 16px; margin: auto; border-radius: 8px;">OK</div></a></div>
                             
                         
 

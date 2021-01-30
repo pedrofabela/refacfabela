@@ -19,6 +19,8 @@ public interface ConsultaUsuarioDAO {
     
     
      public List clientesCon() throws Exception;
+      public String dolarCambio() throws Exception;
+       public String pass() throws Exception;
       public List proveedoresCon() throws Exception;
       public List usuariosCon() throws Exception;
       public List clientesBusqueda(camposConBean camp) throws Exception;
@@ -36,6 +38,7 @@ public interface ConsultaUsuarioDAO {
          public boolean GuardaProv(camposConBean camp) throws Exception;
          public boolean ActualizaDatos(camposConBean camp) throws Exception;
           public boolean ActualizaBodegaStock(camposConBean camp) throws Exception;
+           public boolean actualizaTipoCambio(camposConBean camp) throws Exception;
             public boolean actualizarNoCotiza(camposConBean camp) throws Exception;
               public boolean actualizaCobra(camposConBean camp) throws Exception;
             public boolean actualizaEstatusEntrega(camposConBean camp) throws Exception;

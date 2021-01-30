@@ -124,7 +124,7 @@ public class Acceso_Action extends ActionSupport implements SessionAware{
 
             if(usuariocons!=null){
                 
-                GeneraXml2.jaxBObjectToXml(GeneraXml2.createComprobante());
+               // GeneraXml2.jaxBObjectToXml(GeneraXml2.createComprobante());
                 
                 session.put("usuario",usuariocons);
 
