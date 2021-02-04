@@ -5,12 +5,18 @@
  */
 package business;
 
+import beans.FacturaBean;
+import beans.camposConBean;
+import java.util.List;
+
 /**
  *
  * @author gioca
  */
 public interface FacturaService {
     
-    public void FacturarVenta(Integer idVenta);
+    public void FacturarVenta(camposConBean camp);
+    public List <camposConBean> Obtenerusocfdi();
+      public List <camposConBean> Obtenerformapago();
     
 }

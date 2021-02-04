@@ -40,6 +40,95 @@ public class FacturaBean implements Serializable{
     public String PRODUCTO;
     public String UNIDADMEDIDA;
     public String CVE_SAT;
+    
+    //FACTURACIÓN 
+    public String N_ID;
+    public String UUID;
+    public String ESTADO;
+    public String NO_CERTIFICADOSAT;
+    public String SELLOCFD;
+    public String SELLOSAT;
+    public String CADENAORIGINAL;
+    public String S_CLAVE;
+    public String S_NOMBRE;
+
+    public String getS_CLAVE() {
+        return S_CLAVE;
+    }
+
+    public void setS_CLAVE(String S_CLAVE) {
+        this.S_CLAVE = S_CLAVE;
+    }
+
+    public String getS_NOMBRE() {
+        return S_NOMBRE;
+    }
+
+    public void setS_NOMBRE(String S_NOMBRE) {
+        this.S_NOMBRE = S_NOMBRE;
+    }
+    
+
+    
+    
+    public String getN_ID() {
+        return N_ID;
+    }
+
+    public void setN_ID(String N_ID) {
+        this.N_ID = N_ID;
+    }
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
+
+    public String getESTADO() {
+        return ESTADO;
+    }
+
+    public void setESTADO(String ESTADO) {
+        this.ESTADO = ESTADO;
+    }
+
+    public String getNO_CERTIFICADOSAT() {
+        return NO_CERTIFICADOSAT;
+    }
+
+    public void setNO_CERTIFICADOSAT(String NO_CERTIFICADOSAT) {
+        this.NO_CERTIFICADOSAT = NO_CERTIFICADOSAT;
+    }
+
+    public String getSELLOCFD() {
+        return SELLOCFD;
+    }
+
+    public void setSELLOCFD(String SELLOCFD) {
+        this.SELLOCFD = SELLOCFD;
+    }
+
+    public String getSELLOSAT() {
+        return SELLOSAT;
+    }
+
+    public void setSELLOSAT(String SELLOSAT) {
+        this.SELLOSAT = SELLOSAT;
+    }
+
+    public String getCADENAORIGINAL() {
+        return CADENAORIGINAL;
+    }
+
+    public void setCADENAORIGINAL(String CADENAORIGINAL) {
+        this.CADENAORIGINAL = CADENAORIGINAL;
+    }
+
+    
+            
 
     public String getNO_VENTA() {
         return NO_VENTA;

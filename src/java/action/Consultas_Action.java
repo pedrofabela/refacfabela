@@ -5,6 +5,7 @@
  */
 package action;
 
+import beans.FacturaBean;
 import beans.Navegacion;
 import beans.camposConBean;
 import beans.clientesBean;
@@ -15,7 +16,9 @@ import beans.proveedoresBean;
 import beans.usuarioBean;
 import business.AccesoBusiness;
 import business.ConsultaBusiness;
+import business.FacturaService;
 import com.opensymphony.xwork2.ActionSupport;
+import daos.FacturaServiceImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -84,6 +87,14 @@ public class Consultas_Action extends ActionSupport implements SessionAware {
     public List<productosBean> ListaValorLlegada = new ArrayList<productosBean>();
      public List<productosBean> ListaHistoriaBodegas = new ArrayList<productosBean>();
   public List<productosBean> ListaCatSat = new ArrayList<productosBean>();
+  public List<camposConBean> listausocfdi = new ArrayList<camposConBean>();
+     public List<camposConBean> listaformapago = new ArrayList<camposConBean>();
+     
+      private FacturaService facturaService;
+    
+    public Consultas_Action() throws Exception{
+        this.facturaService = new FacturaServiceImpl();
+    }
     
     
     Statement objConexion;
@@ -133,6 +144,9 @@ public class Consultas_Action extends ActionSupport implements SessionAware {
     boolean botonAct = true;
     
      boolean traspaso=false;
+     
+     boolean banfacturasi=false;
+     boolean banfacturano=false;
 
     
     
@@ -159,6 +173,38 @@ public class Consultas_Action extends ActionSupport implements SessionAware {
 
     public void setListaCatSat(List<productosBean> ListaCatSat) {
         this.ListaCatSat = ListaCatSat;
+    }
+
+    public List<camposConBean> getListausocfdi() {
+        return listausocfdi;
+    }
+
+    public void setListausocfdi(List<camposConBean> listausocfdi) {
+        this.listausocfdi = listausocfdi;
+    }
+
+    public List<camposConBean> getListaformapago() {
+        return listaformapago;
+    }
+
+    public void setListaformapago(List<camposConBean> listaformapago) {
+        this.listaformapago = listaformapago;
+    }
+
+    public boolean isBanfacturasi() {
+        return banfacturasi;
+    }
+
+    public void setBanfacturasi(boolean banfacturasi) {
+        this.banfacturasi = banfacturasi;
+    }
+
+    public boolean isBanfacturano() {
+        return banfacturano;
+    }
+
+    public void setBanfacturano(boolean banfacturano) {
+        this.banfacturano = banfacturano;
     }
 
     
@@ -1910,7 +1956,9 @@ public class Consultas_Action extends ActionSupport implements SessionAware {
             String aut=camp.getAUTORIZACION();
             String pass=consult.pass();
             
-            if(pass==aut){
+            System.out.println(pass);
+            
+            if(pass.equals(aut)){
             consult.eliminarProducto(camp);
             consult.eliminarProductoBodegas(camp);
             consult.eliminarProductoAlternativos(camp);
@@ -1939,6 +1987,7 @@ public class Consultas_Action extends ActionSupport implements SessionAware {
                 camp.setCATEGORIA("");
                 camp.setPRECIO_CAL("");
                 camp.setCONSULTA_PARTE("");
+                camp.setCVE_SAT("");
             
             
             
@@ -1949,6 +1998,9 @@ public class Consultas_Action extends ActionSupport implements SessionAware {
                 
             }
             else{
+                
+                 addFieldError("ELIMINADO","Contraseña incorrecta favor de verificarla e intentalo nuevamente");
+                
                 
             }
             
@@ -5430,15 +5482,27 @@ try {
              
                 Total_general=Total_general+Float.parseFloat(LLCB.getPRECIO_FINAL());
                 camp.setSTATUS_VENTA(LLCB.getSTATUS_VENTA());
-              
-               
-               
+                             
             }
-            System.out.println("Estatus de la venta"+camp.getSTATUS_VENTA());
             
             camp.setTOTAL_COTIZACION(String.valueOf(Total_general));
+            
+            if(camp.getSTATUS_VENTA().equals("V")){
+                
+                
+                
+            }
+            else if(camp.getSTATUS_VENTA().equals("2") && camp.getSTATUS_VENTA()!="3") {
+            
+            listausocfdi= this.facturaService.Obtenerusocfdi();
+            listaformapago=this.facturaService.Obtenerformapago();
+                banfacturasi=true;
                
-            ListaTraerProducto=consult.traerProducto(camp);
+            }
+            
+               
+                      
+           ListaTraerProducto=consult.traerProducto(camp);
          
          
          

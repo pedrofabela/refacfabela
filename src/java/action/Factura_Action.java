@@ -5,6 +5,7 @@
  */
 package action;
 
+import beans.FacturaBean;
 import beans.Navegacion;
 import beans.camposConBean;
 import beans.clientesBean;
@@ -18,6 +19,7 @@ import business.ConsultaBusiness;
 import business.FacturaService;
 import com.opensymphony.xwork2.ActionSupport;
 import daos.FacturaServiceImpl;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -28,6 +30,16 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import utilidades.Constantes;
@@ -54,6 +66,10 @@ public class Factura_Action extends ActionSupport implements SessionAware {
     //LISTAS PERSISTENTES DEL MENU
     public List<moduloBean> modulosAUX = new ArrayList<moduloBean>();
     public List<moduloAuxBean> modulosAUXP = new ArrayList<moduloAuxBean>();
+    public List<FacturaBean> listausocfdi = new ArrayList<FacturaBean>();
+     public List<FacturaBean> listaformapago = new ArrayList<FacturaBean>();
+     public List<productosBean> ListaCarroCotizacion = new ArrayList<productosBean>();
+    public List<productosBean> ListaTraerProducto = new ArrayList<productosBean>();
   
     Statement objConexion;
     PreparedStatement objPreConexion;
@@ -66,7 +82,37 @@ public class Factura_Action extends ActionSupport implements SessionAware {
     private String TipoError;
     private String TipoException;
 
-  
+    
+    
+    
+    public List<productosBean> getListaCarroCotizacion() {
+        return ListaCarroCotizacion;
+    }
+
+    public void setListaCarroCotizacion(List<productosBean> ListaCarroCotizacion) {
+        this.ListaCarroCotizacion = ListaCarroCotizacion;
+    }
+
+    public List<productosBean> getListaTraerProducto() {
+        return ListaTraerProducto;
+    }
+
+    public void setListaTraerProducto(List<productosBean> ListaTraerProducto) {
+        this.ListaTraerProducto = ListaTraerProducto;
+    }
+
+    
+    
+    
+    
+    public List<FacturaBean> getListaformapago() {
+        return listaformapago;
+    }
+
+    public void setListaformapago(List<FacturaBean> listaformapago) {
+        this.listaformapago = listaformapago;
+    }
+
     public Statement getObjConexion() {
         return objConexion;
     }
@@ -89,6 +135,22 @@ public class Factura_Action extends ActionSupport implements SessionAware {
 
     public void setConecta(Connection conecta) {
         this.conecta = conecta;
+    }
+
+    public List<FacturaBean> getListausocfdi() {
+        return listausocfdi;
+    }
+
+    public void setListausocfdi(List<FacturaBean> listausocfdi) {
+        this.listausocfdi = listausocfdi;
+    }
+
+    public camposConBean getCamp() {
+        return camp;
+    }
+
+    public void setCamp(camposConBean camp) {
+        this.camp = camp;
     }
 
   
@@ -203,6 +265,9 @@ public class Factura_Action extends ActionSupport implements SessionAware {
     Navegacion objNaveg;
     String ligaRegreso = Navegacion.InitialPage;
     String ligaActual = "";
+    
+    camposConBean camp =new camposConBean();
+    
 
     public void setSession(Map session) {
         this.session = session;
@@ -220,33 +285,7 @@ public class Factura_Action extends ActionSupport implements SessionAware {
         this.ligaRegreso = ligaRegreso;
     }
     
-     public String MuestrafacturaVenta() {
-         try {
-            if (session.get("cveUsuario") != null) {
-                String sUsu = (String) session.get("cveUsuario");
-            } else {
-                addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
-                return "SESION";
-            }
-            if (session.containsKey("usuario")) {
-                usuariocons = (usuarioBean) session.get("usuario");
-                nivelUsuario = usuariocons.getFILTRO();
-
-            } else {
-                addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
-                return "SESION";
-            }
-
-           
-            System.out.println("El nombre de usuario es:" + usuariocons.getNAMEUSUARIO());
-
-        } catch (Exception e) {
-            addActionError("Ocurrio un error: " + e);
-            return "ERROR";
-        }
-
-        return "SUCCESS";
-    }
+    
 
     public String facturaVenta() {
 
@@ -265,10 +304,12 @@ public class Factura_Action extends ActionSupport implements SessionAware {
                 addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
                 return "SESION";
             }
-
-            Integer idVenta= 14201;  
             
-            this.facturaService.FacturarVenta(idVenta);
+            
+
+         
+            
+            this.facturaService.FacturarVenta(camp);
             
 //            for (int i = 14000; i < 14100; i++) {
 //                
@@ -284,6 +325,8 @@ public class Factura_Action extends ActionSupport implements SessionAware {
 
         return "SUCCESS";
     }
+    
+    
 
    
 }

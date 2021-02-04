@@ -9,6 +9,7 @@ import beans.CabeceraXmlBean;
 import beans.ConceptoXmlBean;
 import beans.FacturaBean;
 import beans.ImpuestoBean;
+import beans.camposConBean;
 import java.util.ArrayList;
 import java.util.List;
 import utilidades.ConstantesGenerales;
@@ -19,7 +20,7 @@ import utilidades.ConstantesGenerales;
  */
 public class Transformar {
 
-    public CabeceraXmlBean objCabecera(List<FacturaBean> lista) {
+    public CabeceraXmlBean objCabecera(List<FacturaBean> lista, camposConBean camp) {
 
         System.out.println("lista ObjectCabecera: " + lista);
 
@@ -30,7 +31,7 @@ public class Transformar {
             cabeceraXmlBean.setVersion(ConstantesGenerales.version);
             cabeceraXmlBean.setSerie(ConstantesGenerales.serie);
             cabeceraXmlBean.setFolio(facturaBean.getNO_VENTA());
-            cabeceraXmlBean.setFormaPago(ConstantesGenerales.formaPago);
+            cabeceraXmlBean.setFormaPago(camp.getFORMAPAGO());
             cabeceraXmlBean.setCondicionesPago(ConstantesGenerales.condicionesPago);
             cabeceraXmlBean.setSubTotal(String.valueOf(calculaSubTotal(lista)));
             cabeceraXmlBean.setMoneda(ConstantesGenerales.moneda);
@@ -44,9 +45,10 @@ public class Transformar {
             cabeceraXmlBean.setNombreEmisor(ConstantesGenerales.nombreEmisor);
             cabeceraXmlBean.setRfcEmisor(ConstantesGenerales.rfcEmisor);
             cabeceraXmlBean.setRegimenFiscal(ConstantesGenerales.regimenFiscal);
-            cabeceraXmlBean.setUsoCFDI(ConstantesGenerales.usoCFDI);
+            cabeceraXmlBean.setUsoCFDI(camp.getUSOCFDI());
             cabeceraXmlBean.setNombreReceptor(facturaBean.getRASON_CLIENT());
-            cabeceraXmlBean.setRfcReceptor(ConstantesGenerales.rfcReceptor);// cambiar por rfc de consulta         
+            cabeceraXmlBean.setRfcReceptor(ConstantesGenerales.rfcReceptor);// cambiar por rfc de consulta 
+            cabeceraXmlBean.setEmailReceptor(ConstantesGenerales.emailprueba);// cambiar por email de consulta 
         }
 
         return cabeceraXmlBean;

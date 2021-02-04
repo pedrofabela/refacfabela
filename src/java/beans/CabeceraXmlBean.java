@@ -36,7 +36,17 @@ public class CabeceraXmlBean implements Serializable{
     public String nombreReceptor;
     public String rfcReceptor;
     public String usoCFDI;
+    public String emailReceptor;
 
+    public String getEmailReceptor() {
+        return emailReceptor;
+    }
+
+    public void setEmailReceptor(String emailReceptor) {
+        this.emailReceptor = emailReceptor;
+    }
+
+    
     public String getVersion() {
         return version;
     }
@@ -205,11 +215,13 @@ public class CabeceraXmlBean implements Serializable{
         this.usoCFDI = usoCFDI;
     }
 
+
+
     @Override
     public String toString() {
-        return "CabeceraXmlBean{" + "version=" + version + ", serie=" + serie + ", folio=" + folio + ", fecha=" + fecha + ", formaPago=" + formaPago + ", condicionesPago=" + condicionesPago + ", subTotal=" + subTotal + ", moneda=" + moneda + ", total=" + total + ", tipoComprobante=" + tipoComprobante + ", metodoPago=" + metodoPago + ", lugarExpedicion=" + lugarExpedicion + ", noCertificado=" + noCertificado + ", certificado=" + certificado + ", sello=" + sello + ", nombreEmisor=" + nombreEmisor + ", rfcEmisor=" + rfcEmisor + ", regimenFiscal=" + regimenFiscal + ", nombreReceptor=" + nombreReceptor + ", rfcReceptor=" + rfcReceptor + ", usoCFDI=" + usoCFDI + '}';
+        return "CabeceraXmlBean{" + "version=" + version + ", serie=" + serie + ", folio=" + folio + ", fecha=" + fecha + ", formaPago=" + formaPago + ", condicionesPago=" + condicionesPago + ", subTotal=" + subTotal + ", moneda=" + moneda + ", total=" + total + ", tipoComprobante=" + tipoComprobante + ", metodoPago=" + metodoPago + ", lugarExpedicion=" + lugarExpedicion + ", noCertificado=" + noCertificado + ", certificado=" + certificado + ", sello=" + sello + ", nombreEmisor=" + nombreEmisor + ", rfcEmisor=" + rfcEmisor + ", regimenFiscal=" + regimenFiscal + ", nombreReceptor=" + nombreReceptor + ", rfcReceptor=" + rfcReceptor + ", usoCFDI=" + usoCFDI + ", emailReceptor=" + emailReceptor + '}';
     }
-
+    
    
 
     

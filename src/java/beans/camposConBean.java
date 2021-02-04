@@ -121,7 +121,46 @@ public class camposConBean {
     private String PERFIL;
     private String NAMEUSUARIO;
     private String NAMEPERFIL;
+    private String S_CLAVE;
+    private String S_NOMBRE;
+    private String USOCFDI;
+    private String FORMAPAGO;
 
+    public String getUSOCFDI() {
+        return USOCFDI;
+    }
+
+    public void setUSOCFDI(String USOCFDI) {
+        this.USOCFDI = USOCFDI;
+    }
+
+    public String getFORMAPAGO() {
+        return FORMAPAGO;
+    }
+
+    public void setFORMAPAGO(String FORMAPAGO) {
+        this.FORMAPAGO = FORMAPAGO;
+    }
+
+    
+    
+    public String getS_CLAVE() {
+        return S_CLAVE;
+    }
+
+    public void setS_CLAVE(String S_CLAVE) {
+        this.S_CLAVE = S_CLAVE;
+    }
+
+    public String getS_NOMBRE() {
+        return S_NOMBRE;
+    }
+
+    public void setS_NOMBRE(String S_NOMBRE) {
+        this.S_NOMBRE = S_NOMBRE;
+    }
+
+    
     public String getAUTORIZACION() {
         return AUTORIZACION;
     }

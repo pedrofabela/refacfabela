@@ -10,12 +10,27 @@ import beans.CabeceraXmlBean;
 import beans.ConceptoXmlBean;
 import beans.FacturaBean;
 import beans.ImpuestoBean;
+import beans.camposConBean;
 import business.FacturaService;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import mappers.FacturaMapper;
+import mappers.catalogosMapper;
 import mx.bigdata.sat.cfdi.v33.schema.Comprobante;
+import utilidades.Constantes;
+import utilidades.ObjPrepareStatement;
 
 /**
  *
@@ -26,20 +41,23 @@ public class FacturaServiceImpl extends OracleDAOFactory implements FacturaServi
     private GeneraXml generaxml = new GeneraXml();
     private Transformar transforma = new Transformar();
     private TimbrarXml timbrarXml= new TimbrarXml();
+    String error="";
 
     @Override
-    public void FacturarVenta(Integer idVenta) {
+    public void FacturarVenta(camposConBean camp) {
 
         try {
 
-            List<FacturaBean> listaFacturaVenta = this.obtenerVenta(idVenta);
+            List<FacturaBean> listaFacturaVenta = this.obtenerVenta(Integer.parseInt(camp.getNO_VENTA()));
+            
+            System.out.println("lista:"+listaFacturaVenta.size());
 
             //System.out.println("listaFacturaVenta: "+listaFacturaVenta.size());
             CabeceraXmlBean cabeceraXmlBean = new CabeceraXmlBean();
             ImpuestoBean impuestoBean= new ImpuestoBean();
             
             //pasamos lista de base a objeto cabeceraXmlBean
-            cabeceraXmlBean = transforma.objCabecera(listaFacturaVenta);
+            cabeceraXmlBean = transforma.objCabecera(listaFacturaVenta, camp);
             
             //pasamos lista de base a lista concepto
             List<ConceptoXmlBean> listaConceptos = transforma.listaConceptos(listaFacturaVenta);
@@ -51,7 +69,7 @@ public class FacturaServiceImpl extends OracleDAOFactory implements FacturaServi
             Comprobante xml = generaxml.createComprobante(cabeceraXmlBean, listaConceptos, impuestoBean);
             
             //timbramos xml
-            timbrarXml.timbrarXml(xml, idVenta);
+            timbrarXml.timbrarXml(xml, Integer.parseInt(camp.getNO_VENTA()), cabeceraXmlBean);
             
             
 
@@ -59,6 +77,34 @@ public class FacturaServiceImpl extends OracleDAOFactory implements FacturaServi
             Logger.getLogger(FacturaServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void  guardarDatosFactura(FacturaBean facturaBean) throws Exception {
+
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+        ObjPrepareStatement temporal;
+       
+           temporal = new ObjPrepareStatement("NO_VENTA", "STRING", facturaBean.getNO_VENTA());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("UUID", "STRING", facturaBean.getUUID());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ESTADO", "STRING", facturaBean.getESTADO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("NO_CERTIFICADOSAT", "STRING", facturaBean.getNO_CERTIFICADOSAT());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("SELLOCFD", "STRING", facturaBean.getSELLOCFD());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("SELLOSAT", "STRING", facturaBean.getSELLOSAT());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("CADENAORIGINAL", "STRING", facturaBean.getCADENAORIGINAL());
+        arregloCampos.add(temporal);
+
+        super.queryInsert("FACTURAS", arregloCampos);
+     }
+            
+            
+
+      
+ 
 
     private List<FacturaBean> obtenerVenta(int idVenta) {
 
@@ -106,5 +152,52 @@ public class FacturaServiceImpl extends OracleDAOFactory implements FacturaServi
         return listaVenta;
 
     }
+
+    @Override
+    public List<camposConBean> Obtenerusocfdi() {
+        List listaUso = null;
+        
+          String query = "SELECT S_CLAVE, S_NOMBRE FROM CAT_USOCFDI WHERE N_ESTATUS=1";
+        
+          
+          
+        try {
+            listaUso = queryForList(query, new catalogosMapper());
+            //System.out.println("Lista venta: "+listaVenta.toString());
+        } catch (Exception ex) {
+            Logger.getLogger(FacturaServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        
+        return listaUso;
+    }
+
+    @Override
+    public List<camposConBean> Obtenerformapago() {
+        
+        List listaformapago = null;
+        
+          String query = "SELECT S_CLAVE, S_NOMBRE FROM CAT_FORMAPAGO WHERE N_ESTATUS=1";
+        
+          
+          
+        try {
+            listaformapago = queryForList(query, new catalogosMapper());
+            //System.out.println("Lista venta: "+listaVenta.toString());
+        } catch (Exception ex) {
+            Logger.getLogger(FacturaServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        
+        return listaformapago;
+        
+        
+    }
+    
+    
+    
+   
 
 }

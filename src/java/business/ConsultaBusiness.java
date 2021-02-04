@@ -271,6 +271,9 @@ public class ConsultaBusiness {
         List lista = this.ConDAO.ventaConsulta(camp);
         return lista;
     }  
+          
+             
+             
               public List ventaConsultaDia(camposConBean camp) throws Exception{
         List lista = this.ConDAO.ventaConsultaDia(camp);
         return lista;

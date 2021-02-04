@@ -150,7 +150,7 @@ public class GeneraXml {
         receptor.setNombre(cabeceraXml.getNombreReceptor());
         //receptor.setResidenciaFiscal(CPais.MEX);
         //receptor.setNumRegIdTrib("ResidenteExtranjero1");
-        receptor.setUsoCFDI(CUsoCFDI.fromValue(ConstantesGenerales.usoCFDI));
+        receptor.setUsoCFDI(CUsoCFDI.fromValue(cabeceraXml.getUsoCFDI()));
         return receptor;
     }
 
