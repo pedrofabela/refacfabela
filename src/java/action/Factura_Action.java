@@ -305,15 +305,85 @@ public class Factura_Action extends ActionSupport implements SessionAware {
                 return "SESION";
             }
             
+            ConsultaBusiness consult =new ConsultaBusiness();
             
+            boolean usocfdi=false;
+            boolean formapago=false;
+            boolean razon=false;
+            boolean rfc=false;
+            boolean correo=false;
+           
+            
+            if(camp.getUSOCFDI().length()>1){
+                
+                usocfdi=true;
+            }
+            else{
+                usocfdi=false;
+            }
+            
+              if(camp.getFORMAPAGO().length()>1){
+                
+                formapago=true;
+            }
+            else{
+                formapago=false;
+            }
+              
+               if(camp.getRAZONSOCIAL().length()>1){
+                
+                razon=true;
+            }
+            else{
+                razon=false;
+            }
+                  if(camp.getRFC_CLIENTE().length()>1){
+                
+                rfc=true;
+            }
+            else{
+                rfc=false;
+            }
 
+           if(camp.getCORREO_CLIENTE().length()>1){
+                
+                correo=true;
+            }
+            else{
+                correo=false;
+            }
+           
+           if(usocfdi && formapago && razon && rfc && correo){
          
+           
             
-            this.facturaService.FacturarVenta(camp);
+            if(this.facturaService.FacturarVenta(camp)){
+                 
+        // actualiza el esttus de la venta a facturado
+          consult.actualizaEstatusVentaFactura(camp);
+                
+            }
+            else{
+                
+                addFieldError("errorfactura", "¡No se puedo generar tu factura, intenta más tarde!");
+                
+                return "ERROR";
+                
+            }
+           
+          
+           }
+           else{
+               
+               addFieldError("errorfactura", "Todos los campos son requeridos");
+             return "ERROR";
+           }
             
-//            for (int i = 14000; i < 14100; i++) {
-//                
-//            }
+          
+           
+           
+            
+//           
             
             
      

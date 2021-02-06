@@ -125,7 +125,18 @@ public class camposConBean {
     private String S_NOMBRE;
     private String USOCFDI;
     private String FORMAPAGO;
+    private String FOLIOSRESTANTES;
 
+    
+    
+    
+    public String getFOLIOSRESTANTES() {
+        return FOLIOSRESTANTES;
+    }
+
+    public void setFOLIOSRESTANTES(String FOLIOSRESTANTES) {
+        this.FOLIOSRESTANTES = FOLIOSRESTANTES;
+    }
     public String getUSOCFDI() {
         return USOCFDI;
     }

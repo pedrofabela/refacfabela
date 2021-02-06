@@ -15,8 +15,9 @@ import java.util.List;
  */
 public interface FacturaService {
     
-    public void FacturarVenta(camposConBean camp);
+    public boolean FacturarVenta(camposConBean camp);
     public List <camposConBean> Obtenerusocfdi();
       public List <camposConBean> Obtenerformapago();
+        public List <FacturaBean> obtenerVenta(int idventa);
     
 }

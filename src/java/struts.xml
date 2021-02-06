@@ -505,10 +505,10 @@
         </action>
         
          <action name="cobraNotaActualiza" class="action.Consultas_Action" method="cobraNotaActualiza">
-            <result name="SUCCESS">/pages/consultaVentaCobra.jsp</result>			              
-            <result name="ERROR">/pages/login.jsp</result>
-            <result name="input">/pages/login.jsp</result>
-            <result name="SESION">/pages/login.jsp</result>
+            <result name="SUCCESS" type="chain">consultaVentaCobra</result>            			              
+            <result name="ERROR">/pages/consultaVentaCobra.jsp</result>
+            <result name="input">/pages/consultaVentaCobra.jsp</result>
+            <result name="SESION">/pages/consultaVentaCobra.jsp</result>
         </action>
          <action name="cobraNotaActualizaFactura" class="action.Consultas_Action" method="cobraNotaActualizaFactura">
             <result name="SUCCESS">/pages/consultaVentaCobra.jsp</result>			              
@@ -597,10 +597,11 @@
         </action>
         
          <action name="facturaVenta" class="action.Factura_Action" method="facturaVenta">
-            <result name="SUCCESS">/pages/consultaVentaCobra.jsp</result>			              
-            <result name="ERROR">/pages/facturaprueba.jsp</result>
-            <result name="input">/pages/facturaprueba.jsp</result>
-            <result name="SESION">/pages/facturaprueba.jsp</result>
+            
+              <result name="SUCCESS" type="chain">consultaVentaCobra</result>			              
+            <result name="ERROR">/pages/consultaVentaCobra.jsp</result>
+            <result name="input">/pages/consultaVentaCobra.jsp</result>
+            <result name="SESION">/pages/consultaVentaCobra.jsp</result>
         </action>
         
         

@@ -70,10 +70,10 @@ public class FacturaMapper implements Mapper {
         } else {
             factura.setSTATUS_VENTA(rs.getString("STATUS_VENTA"));
         }
-        if (rs.getString("FECHA_VENTA") != null) {
-            factura.setFECHA_VENTA(rs.getString("FECHA_VENTA"));
+        if (rs.getDate("FECHA_VENTA") != null) {
+            factura.setFECHA_VENTA(rs.getDate("FECHA_VENTA"));
         } else {
-            factura.setFECHA_VENTA(rs.getString("FECHA_VENTA"));
+            factura.setFECHA_VENTA(rs.getDate("FECHA_VENTA"));
         }
         if (rs.getString("NO_COTIZA") != null) {
             factura.setNO_COTIZA(rs.getString("NO_COTIZA"));

@@ -91,16 +91,20 @@ public class TimbrarXml {
 
             // obtener sello digital
             selloDigital = generarSelloDigital(llavePrivada, cadenaOriginal);
-
+              System.out.println("sali a geerar sello digital");
             String SelloModificado = quitarSaltos(selloDigital);
+               System.out.println("sali a  sello digital modificado");
 
             //Agregamos sello al xml
             xml.setSello(SelloModificado);
+              System.out.println("sali de agregar sello xml");
 
             String consello = ConstantesGenerales.xmltoString(xml);
+              System.out.println("sali de transformar xml a string");
 
             //mandamos xml a timbrar al webservice
             if(consultaFolio()>0){
+                System.out.println("ENTRE A TIMBRAR");
             procesarXml(consello, idVenta,  cabecera);
             }
             else {
@@ -156,7 +160,7 @@ public class TimbrarXml {
     }
 
     private static String generarSelloDigital(final PrivateKey key, final String cadenaOriginal) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException, SignatureException, UnsupportedEncodingException {
-
+        System.out.println("entre a generar sello digital");
         Signature sign = Signature.getInstance("SHA256withRSA");
         sign.initSign(key, new SecureRandom());
         sign.update(cadenaOriginal.getBytes());
@@ -167,7 +171,7 @@ public class TimbrarXml {
     private static void procesarXml(final String xml, int idventa, CabeceraXmlBean cabecera) throws ParserConfigurationException, SAXException, IOException, TransformerException, Exception {
         RespuestaTFD33 Respuesta;
 
-        Respuesta = timbrarCFDI("FAMJ810312D33", "contRa$3na", xml, "TIMBRADO33");
+        Respuesta = timbrarCFDI(ConstantesGenerales.usuarioFolios, ConstantesGenerales.passwordFolios, xml, "TIMBRADO33");
        
         FacturaServiceImpl fact =new FacturaServiceImpl();
         FacturaBean facturaBean=new FacturaBean();
@@ -218,7 +222,7 @@ public class TimbrarXml {
         String logo64 =ConstantesGenerales.logo64;
         String nombreArchivo= idventa+".pdf";
         // "Usuario" , "Contraseña", "UUID", "LogoBase64"
-        Respuesta = obtenerPDF("FAMJ810312D33", "contRa$3na", UUID, logo64);
+        Respuesta = obtenerPDF(ConstantesGenerales.usuarioFolios, ConstantesGenerales.passwordFolios, UUID, logo64);
         
         //Se verifica el resultado
         if(Respuesta.isOperacionExitosa())
@@ -319,9 +323,9 @@ public class TimbrarXml {
             BodyPart htmlPart = new MimeBodyPart();
            
             htmlPart.setContent("<html><center>"
-                   
+                    + "<img src='http://refaccionesfabela.com/LOGO.jpg'>"
                     + "<br/>"
-                    + "<h3><span style='color: #8f1309;'>Refacciones Fabela</span></h3>"
+                    + "<h3><span style='color:blue;'>Refacciones Fabela</span></h3>"
                     + "<p>La factura de tu compra No: "+cabecera.getFolio()+" fue generada de forma satisfactoria "
                       + "<br/>"
                     + "NOTA: El contenido de este correo electr&oacute;nico es confidencial y exclusivo para el  destinatario, <br/>favor de no responder a esta "
@@ -330,11 +334,11 @@ public class TimbrarXml {
                     + "</p></center></html>", "text/html");
 
             BodyPart adjuntoPDF = new MimeBodyPart();
-            adjuntoPDF.setDataHandler(new DataHandler(new FileDataSource("/apache-tomcat-8.5.61/webapps/pdf/"+cabecera.getFolio()+".pdf")));
+            adjuntoPDF.setDataHandler(new DataHandler(new FileDataSource(ConstantesGenerales.rutaPdf+cabecera.getFolio()+".pdf")));
             adjuntoPDF.setFileName(cabecera.getFolio()+".pdf");                       
            
                BodyPart adjuntoXML = new MimeBodyPart();
-            adjuntoXML.setDataHandler(new DataHandler(new FileDataSource("/apache-tomcat-8.5.61/webapps/xml/"+cabecera.getFolio()+".xml")));
+            adjuntoXML.setDataHandler(new DataHandler(new FileDataSource(ConstantesGenerales.rutaxmlTimbrado+cabecera.getFolio()+".xml")));
             adjuntoXML.setFileName(cabecera.getFolio()+".xml");    
             
             multipart.addBodyPart(htmlPart);
@@ -358,14 +362,14 @@ public class TimbrarXml {
         return "SUCCESS";
     }
     
-    private int consultaFolio(){
+    public static int consultaFolio(){
         
         int restantes=0;
         
         RespuestaCreditos Respuesta;
      
      //Se invoca al método del WS
-     Respuesta = consultarCreditos("FAMJ810312D33", "contRa$3na");
+     Respuesta = consultarCreditos(ConstantesGenerales.usuarioFolios, ConstantesGenerales.passwordFolios);
      
      //Se comprueba le operación
      if (Respuesta.isOperacionExitosa())
@@ -398,7 +402,8 @@ public class TimbrarXml {
     }
     
      private static RespuestaCreditos consultarCreditos(java.lang.String usuario, java.lang.String password) {
-        WSCFDI33 service = new WSCFDI33();
+         System.out.println("llege a consultar creditos");
+         WSCFDI33 service = new WSCFDI33();
         IWSCFDI33 port = service.getSoapHttpEndpoint();
         return port.consultarCreditos(usuario, password);
     }

@@ -27,7 +27,7 @@ public class FacturaBean implements Serializable{
     public Double TOTAL_CALCULADO;
     public Double PRECIO_FINAL;
     public String STATUS_VENTA;
-    public String FECHA_VENTA;
+    public Date FECHA_VENTA;
     public String NO_COTIZA;
     public String RASON_CLIENT;
     public String RFC_CLIENT;
@@ -218,14 +218,15 @@ public class FacturaBean implements Serializable{
         this.STATUS_VENTA = STATUS_VENTA;
     }
 
-    public String getFECHA_VENTA() {
+    public Date getFECHA_VENTA() {
         return FECHA_VENTA;
     }
 
-    public void setFECHA_VENTA(String FECHA_VENTA) {
+    public void setFECHA_VENTA(Date FECHA_VENTA) {
         this.FECHA_VENTA = FECHA_VENTA;
     }
 
+   
     
 
     public String getNO_COTIZA() {

@@ -19,6 +19,7 @@ import business.ConsultaBusiness;
 import business.FacturaService;
 import com.opensymphony.xwork2.ActionSupport;
 import daos.FacturaServiceImpl;
+import daos.TimbrarXml;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -5301,6 +5302,12 @@ try {
      
               ListaCarroCotizacion=consult.ventaAlmacen(camp);
               
+              if(ListaCarroCotizacion.size()<=0){
+                  
+                  addFieldError("error", "La venta no exixte o no ha sido cobrada");
+                  
+              }
+              
               
                traerProducto();
          
@@ -5473,6 +5480,8 @@ try {
      
               ListaCarroCotizacion=consult.ventaConsulta(camp);
               
+              System.out.println("Lita"+ListaCarroCotizacion.size());
+              
                Iterator LCC = ListaCarroCotizacion.iterator();
               productosBean LLCB;
           
@@ -5496,14 +5505,38 @@ try {
             
             listausocfdi= this.facturaService.Obtenerusocfdi();
             listaformapago=this.facturaService.Obtenerformapago();
-                banfacturasi=true;
+            
+           List <FacturaBean>  listadatoscliente=this.facturaService.obtenerVenta(Integer.parseInt(camp.getNO_VENTA()));
+           
+                for (FacturaBean facturaBean : listadatoscliente) {
+                   
+                    camp.setRFC_CLIENTE(facturaBean.getRFC_CLIENT());
+                    camp.setRAZONSOCIAL(facturaBean.getRASON_CLIENT());
+                    if(facturaBean.getCORREO_CLIENT()!=null){
+                    camp.setCORREO_CLIENTE(facturaBean.getCORREO_CLIENT().toLowerCase()) ;
+                    }
+                    else{
+                        camp.setCORREO_CLIENTE("") ;   
+                    }
+                }
+            
+                System.out.println("Razon social"+ camp.getRAZONSOCIAL());
+            
+            
+            
+            banfacturasi=true;
                
             }
             
                
                       
-           ListaTraerProducto=consult.traerProducto(camp);
-         
+          // ListaTraerProducto=consult.traerProducto(camp);
+           
+     
+           
+           camp.setFOLIOSRESTANTES(String.valueOf(TimbrarXml.consultaFolio()));
+            System.out.println("folios restantes"+ camp.getFOLIOSRESTANTES());
+       
          
          
        
@@ -5566,7 +5599,7 @@ try {
       
         
       
-       addActionError("La nota se ha cobrado");
+       //addActionError("La nota se ha cobrado");
        
 
         } catch (Exception e) {

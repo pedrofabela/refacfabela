@@ -164,8 +164,8 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaUsuario
     }
 
     public List ventaAlmacen(camposConBean camp) throws Exception {
-        String query = "SELECT VEN.ID_VENTA_PRODUCTO,  VEN.NO_PARTE, VEN.PRODUCTO, VEN.DESCRIPCION, VEN.NO_PRODUCTOVENTA, VEN.ESTATUS_ENTREGA, LOC.ANAQUEL, LOC.NIVEL FROM (SELECT VENTA.NO_PARTE, PROD.PRODUCTO, PROD.DESCRIPCION, VENTA.NO_PRODUCTOVENTA, VENTA.ID_VENTA_PRODUCTO, VENTA.ESTATUS_ENTREGA FROM (SELECT NO_PARTE, PRODUCTO, DESCRIPCION FROM FINAL_PRODUCTOS)PROD JOIN (SELECT NO_VENTA, NO_PARTE, NO_PRODUCTOVENTA, ID_VENTA_PRODUCTO, ESTATUS_ENTREGA FROM VENTA_PRODUCTOS WHERE NO_VENTA='" + camp.getNO_VENTA() + "')VENTA ON PROD.NO_PARTE=VENTA.NO_PARTE)VEN JOIN (SELECT ANAQUEL, NIVEL, NO_PARTE FROM BODEGAS WHERE NAME_BODEGA='LOCAL')LOC ON VEN.NO_PARTE=LOC.NO_PARTE ORDER BY TO_NUMBER(ID_VENTA_PRODUCTO)";
-        // System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
+        String query = "SELECT VEN.ID_VENTA_PRODUCTO,  VEN.NO_PARTE, VEN.PRODUCTO, VEN.DESCRIPCION, VEN.NO_PRODUCTOVENTA, VEN.ESTATUS_ENTREGA, LOC.ANAQUEL, LOC.NIVEL FROM (SELECT VENTA.NO_PARTE, PROD.PRODUCTO, PROD.DESCRIPCION, VENTA.NO_PRODUCTOVENTA, VENTA.ID_VENTA_PRODUCTO, VENTA.ESTATUS_ENTREGA FROM (SELECT NO_PARTE, PRODUCTO, DESCRIPCION FROM FINAL_PRODUCTOS)PROD JOIN (SELECT NO_VENTA, NO_PARTE, NO_PRODUCTOVENTA, ID_VENTA_PRODUCTO, ESTATUS_ENTREGA FROM VENTA_PRODUCTOS WHERE NO_VENTA='" + camp.getNO_VENTA() + "' AND (STATUS_VENTA='3' OR STATUS_VENTA='2') )VENTA ON PROD.NO_PARTE=VENTA.NO_PARTE)VEN JOIN (SELECT ANAQUEL, NIVEL, NO_PARTE FROM BODEGAS WHERE NAME_BODEGA='LOCAL')LOC ON VEN.NO_PARTE=LOC.NO_PARTE ORDER BY TO_NUMBER(ID_VENTA_PRODUCTO)";
+        System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
         List list = null;
         list = queryForList(query, new consultaVentaAlmacenMapper());
         return list;
@@ -1047,6 +1047,23 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaUsuario
         //Se terminan de adicionar a nuesto ArrayLis los objetos
         //Ejecutar la funcion del OracleDAOFactory queryInsert
         return oraDaoFac.queryUpdate("PROVEE", arregloCampos, Condicion);
+    }
+     public boolean actualizaEstatusVentaFactura(camposConBean camp) throws Exception {
+        //Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+        ObjPrepareStatement temporal;
+        //Constantes.enviaMensajeConsola("Entre al DAO del INSERT DATOS...................................");
+        //En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        // Integer a=Integer.parseInt(correspondencia1.getCANTI1());
+        temporal = new ObjPrepareStatement("STATUS_VENTA", "STRING", "3");
+        arregloCampos.add(temporal);
+        
+        String Condicion;
+        Condicion = "WHERE NO_VENTA=" + "'" + "" + camp.getNO_VENTA()+ "" + "'" + "";
+
+        //Se terminan de adicionar a nuesto ArrayLis los objetos
+        //Ejecutar la funcion del OracleDAOFactory queryInsert
+        return oraDaoFac.queryUpdate("VENTA_PRODUCTOS", arregloCampos, Condicion);
     }
 
     public boolean actualizaProductos(camposConBean camp) throws Exception {

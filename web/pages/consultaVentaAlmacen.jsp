@@ -210,7 +210,7 @@ function myFunction(number) {
                                 <s:if test="ListaCarroCotizacion.size()<1 && camp.NO_VENTA.length()>0">
                                       <div class="div_sec1">
                                     
-                         <div style="width: 350px; height: 30px; color: white; font-size: 12px; background: green; text-align: center;  margin-right: 50px;  border-radius: 10px; margin-left: 50px;  margin: auto; margin-top: 80px; font-size: 14px; box-shadow: 5px 5px 10px #333; ">¡El número de nota consultado no fue encontrado!</div>
+                         <div style="width: 80%; height: 30px; color: white; font-size: 12px; background: green; text-align: center;  margin-right: 50px;  border-radius: 10px; margin-left: 50px;  margin: auto; margin-top: 80px; font-size: 14px; box-shadow: 5px 5px 10px #333; ">¡El número de nota consultado no fue encontrado ó no ha sido cobrado!</div>
                                         </div>
                                 </s:if>
                                 <s:if test="ListaCarroCotizacion.size()>0">
@@ -308,6 +308,7 @@ function myFunction(number) {
 
                             
                                </s:if> 
+                              
                   
                                 <s:if test="ListaTraerProducto.size()>0">     
                                 

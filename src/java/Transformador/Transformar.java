@@ -46,9 +46,9 @@ public class Transformar {
             cabeceraXmlBean.setRfcEmisor(ConstantesGenerales.rfcEmisor);
             cabeceraXmlBean.setRegimenFiscal(ConstantesGenerales.regimenFiscal);
             cabeceraXmlBean.setUsoCFDI(camp.getUSOCFDI());
-            cabeceraXmlBean.setNombreReceptor(facturaBean.getRASON_CLIENT());
-            cabeceraXmlBean.setRfcReceptor(ConstantesGenerales.rfcReceptor);// cambiar por rfc de consulta 
-            cabeceraXmlBean.setEmailReceptor(ConstantesGenerales.emailprueba);// cambiar por email de consulta 
+            cabeceraXmlBean.setNombreReceptor(camp.getRAZONSOCIAL());
+            cabeceraXmlBean.setRfcReceptor(ConstantesGenerales.rfcReceptor);// cambiar por rfc de camp 
+            cabeceraXmlBean.setEmailReceptor(ConstantesGenerales.emailprueba);// cambiar por email camp
         }
 
         return cabeceraXmlBean;

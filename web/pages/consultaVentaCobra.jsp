@@ -294,12 +294,22 @@
                                         <s:if test='camp.STATUS_VENTA=="2"'>
                                            
                                             <div style="width: 100%; background: #cccccc; border-radius: 10px; margin-top: 0px; margin-bottom: 20px; color: black; ">
-                                              <div style="width: 100%; text-align: center; margin-top: 50px; margin-bottom: 20px;"><h2>Facturación</h2></div>
+                                            
+                                                <div style="width: 100%; text-align: center; margin-top: 0px; margin-bottom: 20px; "><h2>Facturación</h2></div>
                                                 <div style="width: 100%; text-align: center;"><s:select style="width:70%;  text-align: center;" cssClass="campoFormSelect" id="usocfdi" name="camp.USOCFDI" list="listausocfdi" listKey="S_CLAVE" listValue="S_NOMBRE" headerKey="" headerValue="Seleccione uso de CFDI" /> </div>
                                             <div style="width: 100%; text-align: center;"><s:select style="width:70%;  text-align: center;" cssClass="campoFormSelect" id="formapago" name="camp.FORMAPAGO" list="listaformapago" listKey="S_CLAVE" listValue="S_NOMBRE" headerKey="" headerValue="Seleccione forma de pago" /> </div>
+                                            <div style="width: 100%; text-align: center;"><s:textfield name="camp.RAZONSOCIAL" id="RAZONSOCIAL" placeholder="Razon Social" required="true"  cssClass="campoFormBusqueda"></s:textfield> </div>
+                                            <div style="width: 100%; text-align: center;"><s:textfield name="camp.RFC_CLIENTE" id="RFC_CLIENTE" placeholder="Nombre del cliente" required="true"  cssClass="campoFormBusqueda"></s:textfield> </div>
+                                            <div style="width: 100%; text-align: center;"><s:textfield name="camp.CORREO_CLIENTE" id="CORREO_CLIENTE" placeholder="Número de Venta" required="true"  cssClass="campoFormBusqueda"></s:textfield> </div>
 
-                                            <div style="width: 100%; text-align: center; margin-bottom: 20px;" >  <a href="Javascript:guarda('facturaVenta')" ><div class="boton">  Facturar  </div> </a></div>
+                                            <a href="Javascript:guarda('facturaVenta')" style="margin-bottom: 20px;" ><div class="boton">  Facturar  </div> </a>
+                                            <div style="width: 100%; text-align: center; color:red;"> <s:fielderror name="errorfactura" id="errorfactura"></s:fielderror></div>
+                                            
+                                            <br></br>
+                                                <div style="font-size: 14px; text-align: center; position: relative; padding: 5px; background: purple; color: white; border-right: 8px; ">Timbres restantes:  <s:property value="camp.FOLIOSRESTANTES"></s:property></div>
                                             </div>
+                                            
+                                           
                                                                                         
                                         </s:if>
                                             
@@ -319,10 +329,15 @@
                                          <s:if test='camp.STATUS_VENTA=="V"'>
                                             <table  style="border-collapse: collapse; border: 1px solid white; width: 90%; margin: auto;">
                                                 <tr style="border-collapse: collapse; border: 1px solid white;">
-                                                    <td id="centrar-dato">  <a href="<s:property value="#myUrl" />" target="_blank"><img src="img/descarga.png" style="width: 50px; margin-top: 5px;"></img> </a></td>
-                                                    <td id="centrar-dato">  <a href="Javascript:guarda('cobraNotaActualiza')" ><div class="boton">  Cobrar  </div> </a></td>
-                                                    <td id="centrar-dato">  <a href="Javascript:guarda2('cobraNotaActualizaFactura','idfondo')" ><div class="boton">  Cobrar y Facturar  </div> </a></td>
+                                                    <td id="centrar-dato">  <a href="<s:property value="#myUrl" />" target="_blank"><img src="img/descarga.png" style="width: 50px; margin-top: 0px;"></img> </a></td>
+                                                    
                                                 </tr>
+                                                    <tr style="border-collapse: collapse; border: 1px solid white;">
+                                                        
+                                                      <td id="centrar-dato">  <a href="Javascript:guarda('cobraNotaActualiza')" ><div class="boton">  Cobrar  </div> </a></td>
+
+                                                        
+                                                    </tr>
                                             </table>  
                                                   
                                         </s:if>
@@ -408,6 +423,19 @@
                 <s:hidden  name = "ListaSelectProvee[%{#stat.index}].RFC_PROVEE"  id="RFC_PROVEE"></s:hidden>   
                 <s:hidden  name = "ListaSelectProvee[%{#stat.index}].RASON_PROVEE"  id="RASON_PROVEE"></s:hidden>   
             </s:iterator> 
+            
+             <s:iterator value="listausocfdi" id="listausocfdi" status="stat">
+                <s:hidden  name = "listausocfdi[%{#stat.index}].S_CLAVE"  id="S_CLAVE"></s:hidden>   
+                <s:hidden  name = "listausocfdi[%{#stat.index}].S_NOMBRE"  id="S_NOMBRE"></s:hidden>   
+            </s:iterator> 
+            
+             <s:iterator value="listaformapago" id="listaformapago" status="stat">
+                <s:hidden  name = "listaformapago[%{#stat.index}].S_CLAVE"  id="S_CLAVE"></s:hidden>   
+                <s:hidden  name = "listaformapago[%{#stat.index}].S_NOMBRE"  id="S_NOMBRE"></s:hidden>   
+            </s:iterator> 
+            
+            
+            
              <s:iterator value="ListaCarroCotizacion" id="ListaCarroCotizacion" status="stat">
                 <s:hidden  name = "ListaCarroCotizacion[%{#stat.index}].NO_PARTE"  id="NO_PARTE"></s:hidden>   
                 <s:hidden  name = "ListaCarroCotizacion[%{#stat.index}].PRODUCTO"  id="PRODUCTO"></s:hidden>   
@@ -429,6 +457,7 @@
             <s:hidden  name = "camp.MARCA"  id="NO_MARCA"></s:hidden> 
             <s:hidden  name = "camp.TOTAL_COTIZACION"  id="TOTAL_COTIZACION"></s:hidden> 
              <s:hidden  name = "camp.STATUS_VENTA"  id="STATUS_VENTA"></s:hidden> 
+              <s:hidden  name = "camp.FOLIOSRESTANTES"  id="FOLIOSRESTANTES"></s:hidden> 
 
             <s:textfield type="text" name="camp.PARTEAUX" id="PARTEAUX" style='visibility:hidden'  ></s:textfield>
             <s:textfield type="text" name="camp.PRECIO_CAL" id="PRECIO_CAL" value="NO"  style='visibility:hidden' ></s:textfield>

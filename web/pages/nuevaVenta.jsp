@@ -1090,9 +1090,7 @@ else {
                                                     <tr style="border-collapse: collapse; border: 1px solid white;">
                                                         <td id="centrar-dato">  <a href="#popup2"><div class="boton">  Guardar Cotización  </div> </a></td>
                                                         <td id="centrar-dato">   <s:if test="camp.NO_COTIZACION>0"> <s:if test="camp.NO_VENTA==''"><a href="#popup3"><div class="boton">  Generar Venta  </div> </a></s:if><s:else><div class="boton">  Generar Venta  </div>     </s:else> </s:if> </td>
-                                                        <td id="centrar-dato">  <s:if test="camp.NO_COTIZACION>0"> <a href="Javascript:guarda('clientesBuscarVenta')"><div class="boton">  Generar Factura  </div> </a></s:if> </td>
-
-
+                                                       
 
                                                     </tr>
                                                     
