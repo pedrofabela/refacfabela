@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import mappers.abonosMapper;
 import mappers.alternativosMapper;
 import mappers.anaquelMapper;
 import mappers.carroCotizaMapper;
@@ -23,6 +24,8 @@ import mappers.consultaVentaAlmacenMapper;
 import mappers.consultaVentaMapper;
 import mappers.contadoresPedidosMapper;
 import mappers.cotizacionHist;
+import mappers.creditosMapper;
+import mappers.creditosNotaMapper;
 import mappers.gananciaMapper;
 import mappers.historiaBodegasMapper;
 import mappers.inventarioMapper;
@@ -55,7 +58,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaUsuario
     OracleDAOFactory oraDaoFac = new OracleDAOFactory();
 
     public List clientesCon() throws Exception {
-        String query = "SELECT RASON_CLIENT, RFC_CLIENT, NOMBRE_CLIENT, DIRECCION_CLIENT, TELEFONO_CLIET, CORREO_CLIENT, EMPRESA, RESP_REGISTRO FROM CLIENT   ";
+        String query = "SELECT RASON_CLIENT, RFC_CLIENT, NOMBRE_CLIENT, DIRECCION_CLIENT, TELEFONO_CLIET, CORREO_CLIENT, EMPRESA, RESP_REGISTRO, VALIDADO FROM CLIENT   ";
         // System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
         List list = null;
         list = queryForList(query, new clientesMapper());
@@ -98,6 +101,14 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaUsuario
         List list = null;
         list = queryForList(query, new catSatMapper());
         return list;
+    }
+     
+      public int noCreditos(camposConBean camp) throws Exception {
+        String query = "SELECT  nvl(COUNT(RFC_CLIENTE),'0') AS TOTAL_CREDITOS FROM venta_productos  where status_venta='CRE' AND RFC_CLIENTE='"+camp.getRFCAUX()+"' ";
+        System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
+        int total = 0;
+        total = queryInteger(query);
+        return total;
     }
     public List productosBuscarLike(camposConBean camp) throws Exception {
         String query = "SELECT NO_PARTE, PRODUCTO, CATEGORIA, DESCRIPCION, MARCA, TOTAL_BODEGAS FROM FINAL_PRODUCTOS WHERE NO_PARTE LIKE '%"+camp.getCONSULTA_PARTE()+"%' OR PRODUCTO LIKE '%"+camp.getCONSULTA_PARTE()+"%' OR CATEGORIA LIKE '%"+camp.getCONSULTA_PARTE()+"%' OR DESCRIPCION LIKE '%"+camp.getCONSULTA_PARTE()+"%' OR MARCA LIKE '%"+camp.getCONSULTA_PARTE()+"%' ";
@@ -164,7 +175,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaUsuario
     }
 
     public List ventaAlmacen(camposConBean camp) throws Exception {
-        String query = "SELECT VEN.ID_VENTA_PRODUCTO,  VEN.NO_PARTE, VEN.PRODUCTO, VEN.DESCRIPCION, VEN.NO_PRODUCTOVENTA, VEN.ESTATUS_ENTREGA, LOC.ANAQUEL, LOC.NIVEL FROM (SELECT VENTA.NO_PARTE, PROD.PRODUCTO, PROD.DESCRIPCION, VENTA.NO_PRODUCTOVENTA, VENTA.ID_VENTA_PRODUCTO, VENTA.ESTATUS_ENTREGA FROM (SELECT NO_PARTE, PRODUCTO, DESCRIPCION FROM FINAL_PRODUCTOS)PROD JOIN (SELECT NO_VENTA, NO_PARTE, NO_PRODUCTOVENTA, ID_VENTA_PRODUCTO, ESTATUS_ENTREGA FROM VENTA_PRODUCTOS WHERE NO_VENTA='" + camp.getNO_VENTA() + "' AND (STATUS_VENTA='3' OR STATUS_VENTA='2') )VENTA ON PROD.NO_PARTE=VENTA.NO_PARTE)VEN JOIN (SELECT ANAQUEL, NIVEL, NO_PARTE FROM BODEGAS WHERE NAME_BODEGA='LOCAL')LOC ON VEN.NO_PARTE=LOC.NO_PARTE ORDER BY TO_NUMBER(ID_VENTA_PRODUCTO)";
+        String query = "SELECT VEN.ID_VENTA_PRODUCTO,  VEN.NO_PARTE, VEN.PRODUCTO, VEN.DESCRIPCION, VEN.NO_PRODUCTOVENTA, VEN.ESTATUS_ENTREGA, LOC.ANAQUEL, LOC.NIVEL FROM (SELECT VENTA.NO_PARTE, PROD.PRODUCTO, PROD.DESCRIPCION, VENTA.NO_PRODUCTOVENTA, VENTA.ID_VENTA_PRODUCTO, VENTA.ESTATUS_ENTREGA FROM (SELECT NO_PARTE, PRODUCTO, DESCRIPCION FROM FINAL_PRODUCTOS)PROD JOIN (SELECT NO_VENTA, NO_PARTE, NO_PRODUCTOVENTA, ID_VENTA_PRODUCTO, ESTATUS_ENTREGA FROM VENTA_PRODUCTOS WHERE NO_VENTA='" + camp.getNO_VENTA() + "' AND (STATUS_VENTA='3' OR STATUS_VENTA='2' OR STATUS_VENTA='CRE' OR STATUS_VENTA='PAG') )VENTA ON PROD.NO_PARTE=VENTA.NO_PARTE)VEN JOIN (SELECT ANAQUEL, NIVEL, NO_PARTE FROM BODEGAS WHERE NAME_BODEGA='LOCAL')LOC ON VEN.NO_PARTE=LOC.NO_PARTE ORDER BY TO_NUMBER(ID_VENTA_PRODUCTO)";
         System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
         List list = null;
         list = queryForList(query, new consultaVentaAlmacenMapper());
@@ -268,10 +279,222 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaUsuario
     }
 
     public List anaquel(camposConBean camp) throws Exception {
-        String query = "SELECT DISTINCT(ANAQUEL) FROM BODEGAS ORDER BY TO_NUMBER(ANAQUEL) ";
+        String query = "SELECT ANAQUEL FROM ANAQUEL ORDER BY N_ID ASC ";
         // System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
         List list = null;
         list = queryForList(query, new anaquelMapper());
+        return list;
+    }
+    public List creditosGeneral(camposConBean camp) throws Exception {
+        String query = "SELECT\n"
+                + "    cli.rfc_client AS RFC_CLIENTE,\n"
+                + "    cli.rason_client AS RAZONSOCIAL,\n"
+                + "    cli.telefono_cliet AS TELEFONO_CLIENTE,\n"
+                + "    cli.correo_client AS CORREO_CLIENTE,\n"
+                + "    tot.total_deuda,\n"
+                + "    tot.total_aportaciones_deuda,\n"
+                + "    tot.saldo_deuda,\n"
+                + "    tot.avance_deuda\n"
+                + "FROM\n"
+                + "         (\n"
+                + "        SELECT DISTINCT\n"
+                + "            ( ven.rfc_cliente ),\n"
+                + "            SUM(ven.total_venta)                                                            AS total_deuda,\n"
+                + "            SUM(nvl(apor.total_apotaciones, '0'))                                           AS total_aportaciones_deuda,\n"
+                + "            ( SUM(ven.total_venta) - SUM(nvl(apor.total_apotaciones, '0')) )                    AS saldo_deuda,\n"
+                + "            trunc(((SUM(nvl(apor.total_apotaciones, '0')) * 100) / SUM(ven.total_venta)), 2)\n"
+                + "            || '%'                                                                           AS avance_deuda\n"
+                + "        FROM\n"
+                + "            (\n"
+                + "                SELECT DISTINCT\n"
+                + "                    ( no_venta ),\n"
+                + "                    SUM(to_number(precio_final)) AS total_venta,\n"
+                + "                    rfc_cliente,\n"
+                + "                    fecha_venta\n"
+                + "                FROM\n"
+                + "                    venta_productos\n"
+                + "                WHERE\n"
+                + "                    status_venta = 'CRE'\n"
+                + "                GROUP BY\n"
+                + "                    no_venta,\n"
+                + "                    fecha_venta,\n"
+                + "                    rfc_cliente\n"
+                + "            )  ven\n"
+                + "            LEFT OUTER JOIN (\n"
+                + "                SELECT DISTINCT\n"
+                + "                    ( no_venta ),\n"
+                + "                    SUM(aportacion) AS total_apotaciones\n"
+                + "                FROM\n"
+                + "                    pago_creditos\n"
+                + "                GROUP BY\n"
+                + "                    no_venta\n"
+                + "            )  apor ON ven.no_venta = apor.no_venta\n"
+                + "        GROUP BY\n"
+                + "            ven.rfc_cliente\n"
+                + "    ) tot\n"
+                + "    JOIN client cli ON cli.rfc_client = tot.rfc_cliente";
+        // System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
+        List list = null;
+        list = queryForList(query, new creditosMapper());
+        return list;
+    }
+     public List creditosNota(camposConBean camp) throws Exception {
+         String query = "SELECT\n"
+                 + "    ven.no_venta,\n"
+                 + "    to_date(ven.fecha_venta, 'dd/mm/yyyy')                                                                                    AS fecha_venta,\n"
+                 + "    ven.total_venta  AS total_deuda,\n"
+                 + "    to_number(nvl(apor.total_apotaciones, '0'))                                                                               AS total_aportaciones_deuda,\n"
+                 + "    ( ven.total_venta - to_number(nvl(apor.total_apotaciones, '0')) )                                                             AS saldo_deuda,\n"
+                 + "    CASE\n"
+                 + "        WHEN ( ven.total_venta ) = to_number(nvl(apor.total_apotaciones, '0'))                   THEN\n"
+                 + "            'PAGADO'\n"
+                 + "        WHEN ( ven.total_venta ) <> to_number(nvl(apor.total_apotaciones, '0'))                  THEN\n"
+                 + "            'POR PAGAR'\n"
+                 + "    END                                                                                                                       AS estatus,\n"
+                 + "    trunc(((to_number(nvl(apor.total_apotaciones, '0'))) * 100) / ven.total_venta, 2)                              AS avance_deuda\n"
+                 + "FROM\n"
+                 + "    (\n"
+                 + "        SELECT DISTINCT\n"
+                 + "            ( no_venta ),\n"
+                 + "            SUM(to_number(precio_final)) AS total_venta,\n"
+                 + "            rfc_cliente,\n"
+                 + "            fecha_venta\n"
+                 + "        FROM\n"
+                 + "            venta_productos\n"
+                 + "        WHERE\n"
+                 + "            status_venta = 'CRE'\n"
+                 + "            OR status_venta = 'PAG'\n"
+                 + "        GROUP BY\n"
+                 + "            no_venta,\n"
+                 + "            fecha_venta,\n"
+                 + "            rfc_cliente\n"
+                 + "    )  ven\n"
+                 + "    LEFT OUTER JOIN (\n"
+                 + "        SELECT DISTINCT\n"
+                 + "            ( no_venta ),\n"
+                 + "            SUM(aportacion) AS total_apotaciones\n"
+                 + "        FROM\n"
+                 + "            pago_creditos\n"
+                 + "        GROUP BY\n"
+                 + "            no_venta\n"
+                 + "    )  apor ON ven.no_venta = apor.no_venta\n"
+                 + "WHERE\n"
+                 + "    ven.rfc_cliente = '"+camp.getBUSCARCLIENTE()+"'\n"
+                 + "ORDER BY\n"
+                 + "    ( ven.total_venta - to_number(nvl(apor.total_apotaciones, '0')) ) DESC";
+        // System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
+        List list = null;
+        list = queryForList(query, new creditosNotaMapper());
+        return list;
+    }
+     
+      public List creditosNotaNoVenta(camposConBean camp) throws Exception {
+         String query = "SELECT\n"
+                 + "    ven.no_venta,\n"
+                 + "    to_date(ven.fecha_venta, 'dd/mm/yyyy')                                                                                    AS fecha_venta,\n"
+                 + "    ven.total_venta  AS total_deuda,\n"
+                 + "    to_number(nvl(apor.total_apotaciones, '0'))                                                                               AS total_aportaciones_deuda,\n"
+                 + "    ( ven.total_venta - to_number(nvl(apor.total_apotaciones, '0')) )                                                             AS saldo_deuda,\n"
+                 + "    CASE\n"
+                 + "        WHEN ( ven.total_venta ) = to_number(nvl(apor.total_apotaciones, '0'))                   THEN\n"
+                 + "            'PAGADO'\n"
+                 + "        WHEN ( ven.total_venta ) <> to_number(nvl(apor.total_apotaciones, '0'))                  THEN\n"
+                 + "            'POR PAGAR'\n"
+                 + "    END                                                                                                                       AS estatus,\n"
+                 + "    trunc(((to_number(nvl(apor.total_apotaciones, '0'))) * 100) / ven.total_venta, 2)                              AS avance_deuda\n"
+                 + "FROM\n"
+                 + "    (\n"
+                 + "        SELECT DISTINCT\n"
+                 + "            ( no_venta ),\n"
+                 + "            SUM(to_number(precio_final)) AS total_venta,\n"
+                 + "            rfc_cliente,\n"
+                 + "            fecha_venta\n"
+                 + "        FROM\n"
+                 + "            venta_productos\n"
+                 + "        WHERE\n"
+                 + "            status_venta = 'CRE'\n"
+                 + "            OR status_venta = 'PAG'\n"
+                 + "        GROUP BY\n"
+                 + "            no_venta,\n"
+                 + "            fecha_venta,\n"
+                 + "            rfc_cliente\n"
+                 + "    )  ven\n"
+                 + "    LEFT OUTER JOIN (\n"
+                 + "        SELECT DISTINCT\n"
+                 + "            ( no_venta ),\n"
+                 + "            SUM(aportacion) AS total_apotaciones\n"
+                 + "        FROM\n"
+                 + "            pago_creditos\n"
+                 + "        GROUP BY\n"
+                 + "            no_venta\n"
+                 + "    )  apor ON ven.no_venta = apor.no_venta\n"
+                 + "WHERE\n"
+                 + "    ven.rfc_cliente = '"+camp.getBUSCARCLIENTE()+"' and ven.no_venta='"+camp.getNO_VENTA()+"'\n"
+                 + "ORDER BY\n"
+                 + "    ( ven.total_venta - to_number(nvl(apor.total_apotaciones, '0')) ) DESC";
+       //System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
+        List list = null;
+        list = queryForList(query, new creditosNotaMapper());
+        return list;
+    }
+     public List creditosNotaAbonos(camposConBean camp) throws Exception {
+         String query = "SELECT N_ID, APORTACION, FECHA_APORTACION FROM PAGO_CREDITOS WHERE NO_VENTA='"+camp.getNO_VENTA()+"' ORDER BY FECHA_APORTACION DESC";
+        // System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
+        List list = null;
+        list = queryForList(query, new abonosMapper());
+        return list;
+    }
+    public List creditosGeneralLike(camposConBean camp) throws Exception {
+        String query = "SELECT\n"
+                + "    cli.rfc_client AS RFC_CLIENTE,\n"
+                + "    cli.rason_client AS RAZONSOCIAL,\n"
+                + "    cli.telefono_cliet AS TELEFONO_CLIENTE,\n"
+                + "    cli.correo_client AS CORREO_CLIENTE,\n"
+                + "    tot.total_deuda,\n"
+                + "    tot.total_aportaciones_deuda,\n"
+                + "    tot.saldo_deuda,\n"
+                + "    tot.avance_deuda\n"
+                + "FROM\n"
+                + "         (\n"
+                + "        SELECT DISTINCT\n"
+                + "            ( ven.rfc_cliente ),\n"
+                + "            SUM(ven.total_venta)                                                            AS total_deuda,\n"
+                + "            SUM(nvl(apor.total_apotaciones, '0'))                                           AS total_aportaciones_deuda,\n"
+                + "            ( SUM(ven.total_venta) - SUM(nvl(apor.total_apotaciones, '0')) )                    AS saldo_deuda,\n"
+                + "            trunc(((SUM(nvl(apor.total_apotaciones, '0')) * 100) / SUM(ven.total_venta)), 2)\n"
+                + "            || '%'                                                                           AS avance_deuda\n"
+                + "        FROM\n"
+                + "            (\n"
+                + "                SELECT DISTINCT\n"
+                + "                    ( no_venta ),\n"
+                + "                    SUM(to_number(precio_final)) AS total_venta,\n"
+                + "                    rfc_cliente,\n"
+                + "                    fecha_venta\n"
+                + "                FROM\n"
+                + "                    venta_productos\n"
+                + "                WHERE\n"
+                + "                    status_venta = 'CRE'\n"
+                + "                GROUP BY\n"
+                + "                    no_venta,\n"
+                + "                    fecha_venta,\n"
+                + "                    rfc_cliente\n"
+                + "            )  ven\n"
+                + "            LEFT OUTER JOIN (\n"
+                + "                SELECT DISTINCT\n"
+                + "                    ( no_venta ),\n"
+                + "                    SUM(aportacion) AS total_apotaciones\n"
+                + "                FROM\n"
+                + "                    pago_creditos\n"
+                + "                GROUP BY\n"
+                + "                    no_venta\n"
+                + "            )  apor ON ven.no_venta = apor.no_venta\n"
+                + "        GROUP BY\n"
+                + "            ven.rfc_cliente\n"
+                + "    ) tot\n"
+                + "    JOIN client cli ON cli.rfc_client = tot.rfc_cliente  where cli.rfc_client like '%"+camp.getBUSCARCLIENTE()+"%' or cli.rason_client like '%"+camp.getBUSCARCLIENTE()+"%' ";
+         //System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
+        List list = null;
+        list = queryForList(query, new creditosMapper());
         return list;
     }
 
@@ -444,7 +667,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaUsuario
     }
 
     public List clientesBusqueda(camposConBean camp) throws Exception {
-        String query = "SELECT RASON_CLIENT, RFC_CLIENT, NOMBRE_CLIENT, DIRECCION_CLIENT, TELEFONO_CLIET, CORREO_CLIENT, EMPRESA, RESP_REGISTRO FROM CLIENT WHERE NOMBRE_CLIENT LIKE '%" + camp.getBUSCARCLIENTE() + "%' OR RFC_CLIENT LIKE '%" + camp.getBUSCARCLIENTE() + "%' OR EMPRESA LIKE '%" + camp.getBUSCARCLIENTE() + "%' ";
+        String query = "SELECT RASON_CLIENT, RFC_CLIENT, NOMBRE_CLIENT, DIRECCION_CLIENT, TELEFONO_CLIET, CORREO_CLIENT, EMPRESA, RESP_REGISTRO, VALIDADO FROM CLIENT WHERE RASON_CLIENT LIKE '%" + camp.getBUSCARCLIENTE() + "%' OR RFC_CLIENT LIKE '%" + camp.getBUSCARCLIENTE() + "%'  ";
         System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
         List list = null;
         list = queryForList(query, new clientesMapper());
@@ -460,7 +683,7 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaUsuario
     }
 
     public List clientesBusquedaRfc(camposConBean camp) throws Exception {
-        String query = "SELECT RASON_CLIENT, RFC_CLIENT, NOMBRE_CLIENT, DIRECCION_CLIENT, TELEFONO_CLIET, CORREO_CLIENT, EMPRESA, RESP_REGISTRO FROM CLIENT WHERE RFC_CLIENT='" + camp.getRFCAUX() + "' ";
+        String query = "SELECT RASON_CLIENT, RFC_CLIENT, NOMBRE_CLIENT, DIRECCION_CLIENT, TELEFONO_CLIET, CORREO_CLIENT, EMPRESA, RESP_REGISTRO, VALIDADO FROM CLIENT WHERE RFC_CLIENT='" + camp.getRFCAUX() + "' ";
         System.out.println("QueryConsultaSubModulosPerfil ---> " + query);
         List list = null;
         list = queryForList(query, new clientesMapper());
@@ -498,8 +721,29 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaUsuario
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("RESP_REGISTRO", "STRING", camp.getRESPONSABLE());
         arregloCampos.add(temporal);
+         temporal = new ObjPrepareStatement("VALIDADO", "INT", 1);
+        arregloCampos.add(temporal);
 
         return oraDaoFac.queryInsert("CLIENT", arregloCampos);
+    }
+     public boolean guardaAbonos(camposConBean camp, int no_venta, float aportacion) throws Exception {
+        //Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+        ObjPrepareStatement temporal;
+        //Constantes.enviaMensajeConsola("Entre al DAO del INSERT DATOS...................................");
+        //En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        // Integer a=Integer.parseInt(correspondencia1.getCANTI1());
+        
+     
+        temporal = new ObjPrepareStatement("NO_VENTA", "INT", no_venta);
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("APORTACION", "FLOAT", aportacion);
+        arregloCampos.add(temporal);
+       
+
+       
+
+        return oraDaoFac.queryInsert("PAGO_CREDITOS", arregloCampos);
     }
 
     public boolean GuardaPBodega(camposConBean camp) throws Exception {
@@ -800,6 +1044,8 @@ public class ConsultaDAOImpl extends OracleDAOFactory implements ConsultaUsuario
         temporal = new ObjPrepareStatement("EMPRESA", "STRING", camp.getEMPRESA_CLIENTE());
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("RESP_REGISTRO", "STRING", camp.getRESPONSABLE());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("VALIDADO", "INT", 1);
         arregloCampos.add(temporal);
         String Condicion;
         Condicion = "WHERE RFC_CLIENT=" + "'" + "" + camp.getRFC_CLIENTE() + "" + "'" + "";

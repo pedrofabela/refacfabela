@@ -142,6 +142,8 @@ public class TimbrarXml {
         PKCS8Key pkcs8 = new PKCS8Key(in, password.toCharArray());
         byte[] decrypted = pkcs8.getDecryptedBytes();
         PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(decrypted);
+        
+        System.out.println("llegue a obtener ");
 
         PrivateKey pk = null;
 

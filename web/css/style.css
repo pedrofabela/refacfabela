@@ -298,7 +298,7 @@ a{
 }
 .div_sec1{
     
-    width: 90%;
+    width: 98%;
     min-height: 200px;
     
     background: url(../img/fondodiv.png)  ;
@@ -306,9 +306,7 @@ a{
     border-radius: 20px;
     border: 2px solid #bfbfbf;
     box-shadow: 2px 4px 5px #bfbfbf;
-    border-right: 4px solid #F0B823;
-   
-   
+    border-right: 4px solid #F0B823;     
     margin-top: 20px;
     
     

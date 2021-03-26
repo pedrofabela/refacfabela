@@ -75,6 +75,9 @@ public class ConsultaBusiness {
     public boolean GuardaDatos(camposConBean camp) throws Exception {
         return ConDAO.GuardaDatos(camp);
     }
+     public boolean guardaAbonos(camposConBean camp, int no_venta, float aportacion) throws Exception {
+        return ConDAO.guardaAbonos(camp, no_venta, aportacion);
+    }
 
     public boolean GuardaPBodega(camposConBean camp) throws Exception {
         return ConDAO.GuardaPBodega(camp);
@@ -267,6 +270,10 @@ public class ConsultaBusiness {
         List lista = this.ConDAO.catSat(camp);
         return lista;
     }
+     public int noCreditos(camposConBean camp) throws Exception {
+        int total = this.ConDAO.noCreditos(camp);
+        return total;
+    }
 
     public List productosBuscarLike(camposConBean camp) throws Exception {
         List lista = this.ConDAO.productosBuscarLike(camp);
@@ -375,6 +382,26 @@ public class ConsultaBusiness {
 
     public List anaquel(camposConBean camp) throws Exception {
         List lista = this.ConDAO.anaquel(camp);
+        return lista;
+    }
+     public List creditosGeneral(camposConBean camp) throws Exception {
+        List lista = this.ConDAO.creditosGeneral(camp);
+        return lista;
+    }
+      public List creditosNota(camposConBean camp) throws Exception {
+        List lista = this.ConDAO.creditosNota(camp);
+        return lista;
+    }
+      public List creditosNotaNoVenta(camposConBean camp) throws Exception {
+        List lista = this.ConDAO.creditosNotaNoVenta(camp);
+        return lista;
+    }
+       public List creditosNotaAbonos(camposConBean camp) throws Exception {
+        List lista = this.ConDAO.creditosNotaAbonos(camp);
+        return lista;
+    }
+      public List creditosGeneraLike(camposConBean camp) throws Exception {
+        List lista = this.ConDAO.creditosGeneralLike(camp);
         return lista;
     }
 

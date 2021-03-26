@@ -222,9 +222,9 @@ else {
                                 
                            
                                 <!--TABLA DE UBICACIONES -->
-                       
+                          <s:if test="ListaBuscarProducto.size()>0">
                                 <div id="scroltabla-ubicaciones">
-                                     <s:if test="ListaBuscarProducto.size()>0">
+                                  
                                     <table id="customers">
                                         <thead>
                                             
@@ -243,14 +243,14 @@ else {
                                         </s:iterator>
                                         <s:textfield type="text" name="camp.RFCAUX" id="RFCAUX" style='visibility:hidden'  ></s:textfield> 
                                         </table>
-                                     </s:if>
-                                     </div>
                                   
+                                     </div>
+                                   </s:if>
                                     <!--TABLA DE ALTERNATIVOS -->
 
-                              
+                              <s:if test="ListaBuscarProducto.size()>0">
                                     <div id="scroltabla-ubicaciones">
-                               <s:if test="ListaBuscarProducto.size()>0">
+                               
                                         <table id="customers" >
                                             <thead  >
                                                 <th width="130">Alternativo</th>
@@ -269,8 +269,10 @@ else {
                                         </table>
                                
                                    
-                                    </s:if>
+                                    
                                          </div>
+                              
+                              </s:if>
                                     <!-- <img src="img/maquina-busqueda.jpg" alt="Maquina" style="width: 90%; margin-top: 20px; margin-bottom: 20px;" ></img>-->
 
 
@@ -298,6 +300,12 @@ else {
 
                         </article> 
                         <article class="articulo2">
+
+                        <s:if test="camp.AUX_RFC_CLIENTE.length()>0">
+                            <div style="width: 100%; text-align: center; ">
+                                <div class="div_titulos_sec"> <h2 class="text-tit-sec" style="font-size: 14px;">Cliente: <s:property value="camp.AUX_RFC_CLIENTE"/>-<s:property value="camp.RFCCLIENTE"/></h2></div>
+                            </div>
+                        </s:if>
                             
                         <s:if test="actprod2">
                             
@@ -354,8 +362,8 @@ else {
                                             <thead>
                                                 <th>NP</th>
                                                 <th>RFC</th>
-                                                <th>Nombre del Cliente</th>
-                                                <th>Empresa</th>
+                                                <th>Razón Social</th>
+                                                <th>Estatus</th>
 
                                                 
                                             </thead>
@@ -363,12 +371,16 @@ else {
                                             <s:iterator value="ListaClientes" id="ListaClientes" status="stat" >
                                                 <tr>
                                                     <td id="centrar-dato"><s:property value="#stat.count" /></td> 
-                                                    <td ><a href="Javascript:consultaCliente('asignarCliente','<s:property value="RFC_CLIENT" />','<s:property value="NOMBRE_CLIENT" />')"><s:property value="RFC_CLIENT" /></a></td>
-                                                    <td><s:property value="NOMBRE_CLIENT" /></td>
-                                                    <td><s:property value="EMPRESA" /></td>
-
-                                                  
-
+                                                    <s:if test="VALIDADO==1">
+                                                    <td id="centrar-dato"><a href="Javascript:consultaCliente('asignarCliente','<s:property value="RFC_CLIENT" />','<s:property value="RASON_CLIENT" />')"><s:property value="RFC_CLIENT" /></a></td>
+                                                    ></s:if>
+                                                    <s:else>
+                                                    <td id="centrar-dato"><s:property value="RFC_CLIENT" /></td>
+ 
+                                                    </s:else>
+                                                    <td id="centrar-dato"><s:property value="RASON_CLIENT" /></td>
+                                                    <s:if test="VALIDADO==1"> <td style="background: green; color: white; text-align: center;">VALIDADO</td></s:if> 
+                                                    <s:else><td style="background: red; color: white; text-align: center;">SIN VALIDAR</td></s:else>
                                                 </tr>
 
                                             </s:iterator>
@@ -390,15 +402,17 @@ else {
                                 </s:if>              
                                     </s:if>               
                                             
-                   
+                     
+                       
+                         
                             
-                        <s:if test="camp.NO_PARTE.length()>0">
-                           <div class="div_sec1">
-                               
-                               
-                           
-                               <div class="div_titulos_sec"> <h2 class="text-tit-sec" style="font-size: 14px;">Cliente: <s:property value="camp.AUX_RFC_CLIENTE"/>-<s:property value="camp.RFCCLIENTE"/></h2></div>
-                                 <s:if test="actprod">
+                            
+                               <s:if test="camp.NO_PARTE.length()>0 && camp.AUX_RFC_CLIENTE.length()>0">
+                            <div class="div_sec1">
+                                <div style="width: 100%; text-align: center;"> <h3 >Datos del Producto</h3></div>
+
+
+                               <s:if test="actprod">
                                 <table id="customers" style="width: 85%; margin: auto;">
                                         
                                         
@@ -945,12 +959,12 @@ else {
                            
                                
                             
-                                 </s:if>
-                                
-                                </div>
+                                 </s:if>                                          
                               
-                               
-                        </s:if>
+                                
+                             </div>
+                                </s:if>
+                    
                              
                               
 
@@ -1360,6 +1374,10 @@ else {
                 <s:hidden  name = "ListaClientes[%{#stat.index}].RFC_CLIENT" id="RFC_CLIENT"></s:hidden>
                 <s:hidden  name = "ListaClientes[%{#stat.index}].NOMBRE_CLIENT" id="NOMBRE_CLIENT"></s:hidden>
                 <s:hidden  name = "ListaClientes[%{#stat.index}].EMPRESA" id="EMPRESA"></s:hidden>
+                 <s:hidden  name = "ListaClientes[%{#stat.index}].RASON_CLIENT" id="RASON_CLIENT"></s:hidden>
+                <s:hidden  name = "ListaClientes[%{#stat.index}].DIRECCION_CLIENT" id="DIRECCION_CLIENT"></s:hidden>  
+                <s:hidden  name = "ListaClientes[%{#stat.index}].CORREO_CLIENT" id="CORREO_CLIENT"></s:hidden>
+                  <s:hidden  name = "ListaClientes[%{#stat.index}].VALIDADO" id="VALIDADO"></s:hidden>
                
             </s:iterator>
                 

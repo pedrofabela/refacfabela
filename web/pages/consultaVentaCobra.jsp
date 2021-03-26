@@ -105,6 +105,20 @@
             document.forma.submit();
         }
         
+         function facturar(accion,id){
+            	
+                
+                   if (document.getElementById) {
+                     /* variables para ocultar load de ARCHIVO*/
+                    var GrdCar = document.getElementById(id); //se define la variable "el" igual a nuestro div
+                     GrdCar.style.display = (GrdCar.style.display == 'none') ? 'block' : 'none';/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
+                                                        }
+                
+                
+            document.forma.action = accion;
+            document.forma.submit();
+            }
+        
          function guarda2(accion,id){
            
                
@@ -302,7 +316,7 @@
                                             <div style="width: 100%; text-align: center;"><s:textfield name="camp.RFC_CLIENTE" id="RFC_CLIENTE" placeholder="Nombre del cliente" required="true"  cssClass="campoFormBusqueda"></s:textfield> </div>
                                             <div style="width: 100%; text-align: center;"><s:textfield name="camp.CORREO_CLIENTE" id="CORREO_CLIENTE" placeholder="Número de Venta" required="true"  cssClass="campoFormBusqueda"></s:textfield> </div>
 
-                                            <a href="Javascript:guarda('facturaVenta')" style="margin-bottom: 20px;" ><div class="boton">  Facturar  </div> </a>
+                                            <a href="Javascript:facturar('facturaVenta','idfondo')" style="margin-bottom: 20px;" ><div class="boton">  Facturar  </div> </a>
                                             <div style="width: 100%; text-align: center; color:red;"> <s:fielderror name="errorfactura" id="errorfactura"></s:fielderror></div>
                                             
                                             <br></br>

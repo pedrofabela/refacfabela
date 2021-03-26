@@ -10,4 +10,9 @@
     <system systemId="http://app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc?xsd=xsd1" uri="wsdl/app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc.xsd_xsd1.xsd"/>
     <system systemId="http://app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc?xsd=xsd2" uri="wsdl/app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc.xsd_xsd2.xsd"/>
     <system systemId="http://app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc?xsd=xsd3" uri="wsdl/app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc.xsd_xsd3.xsd"/>
+    <system systemId="https://www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc?WSDL" uri="wsdl/www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc.wsdl"/>
+    <system systemId="http://www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc?xsd=xsd0" uri="wsdl/www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc.xsd_xsd0.xsd"/>
+    <system systemId="http://www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc?xsd=xsd1" uri="wsdl/www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc.xsd_xsd1.xsd"/>
+    <system systemId="http://www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc?xsd=xsd2" uri="wsdl/www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc.xsd_xsd2.xsd"/>
+    <system systemId="http://www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc?xsd=xsd3" uri="wsdl/www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc.xsd_xsd3.xsd"/>
 </catalog>

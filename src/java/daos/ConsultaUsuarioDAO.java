@@ -36,6 +36,8 @@ public interface ConsultaUsuarioDAO {
     public List proveedoresBusquedaRfc(camposConBean camp) throws Exception;
 
     public boolean GuardaDatos(camposConBean camp) throws Exception;
+    
+    public boolean guardaAbonos(camposConBean camp, int no_venta, float aportacion) throws Exception;
 
     public boolean GuardaPBodega(camposConBean camp) throws Exception;
 
@@ -118,6 +120,7 @@ public interface ConsultaUsuarioDAO {
     public List productosBuscar(camposConBean camp) throws Exception;
 
     public List catSat(camposConBean camp) throws Exception;
+     public int noCreditos(camposConBean camp) throws Exception;
 
     public List productosBuscarLike(camposConBean camp) throws Exception;
 
@@ -162,6 +165,14 @@ public interface ConsultaUsuarioDAO {
     public List categoria(camposConBean camp) throws Exception;
 
     public List anaquel(camposConBean camp) throws Exception;
+    
+    public List creditosGeneral(camposConBean camp) throws Exception;
+     public List creditosNota(camposConBean camp) throws Exception;
+     public List creditosNotaNoVenta(camposConBean camp) throws Exception;
+      public List creditosNotaAbonos(camposConBean camp) throws Exception;
+    
+    
+    public List creditosGeneralLike(camposConBean camp) throws Exception;
 
     public List inventarioLista(camposConBean camp) throws Exception;
 

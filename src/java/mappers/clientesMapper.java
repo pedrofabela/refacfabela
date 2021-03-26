@@ -26,7 +26,8 @@ public class clientesMapper implements Mapper{
 		usr.setRESP_REGISTRO(rs.getString("RESP_REGISTRO"));
 		usr.setRFC_CLIENT(rs.getString("RFC_CLIENT"));
                 usr.setTELEFONO_CLIET(rs.getString("TELEFONO_CLIET"));
-                 usr.setRASON_CLIENT(rs.getString("RASON_CLIENT"));
+                usr.setRASON_CLIENT(rs.getString("RASON_CLIENT"));
+                usr.setVALIDADO(rs.getString("VALIDADO"));
                 
 		return usr;
 	}

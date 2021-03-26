@@ -42,7 +42,6 @@ public class productosBean {
     private String MAX_PRODUCT;
     private String MAX_PEDIDO;
     private String MAX_AUXPEDIDO;
-
     private String ID_PRODUCT;
     private String ID_PEDIDO;
     private String AUXPEDIDO;
@@ -51,15 +50,12 @@ public class productosBean {
     private String FECHA_LLEGADA;
     private String ESTATUS_PEDIDO;
     private String CANTIDAD_LLEGADA;
-
     private String TOTAL_PARTES;
     private String TOTAL_PRODUCTOS;
     private String BODEGA;
     private String TOTAL_PRODUCTO_VENTA;
-
     private String AUX_RFC_CLIENTE;
     private String RFCCLIENTE;
-
     private String ID_COTIZAPRODUCTO;
     private String NO_COTIZA;
     private String PRECIO_UNITARIO;
@@ -69,31 +65,27 @@ public class productosBean {
     private String STATUS_COTIZA;
     private String FECHA_COTIZA;
     private String AUXVENTA;
-      private String AUXCOTIZA;
-      private String TOTAL_COTIZACION;
-      private String NO_COTIZACION;
-      private String BORRARPRODUCTO;
-      
-      
-   private String ID_VENTA_PRODUCTO;
-private String NO_VENTA;
-private String NO_PARTE_VENTA;
-private String PRECIO_UNITARIO_VENTA;
-private String NO_PRODUCTOVENTA;
-private String PRECIO_FINAL_VENTA;
-private String RFC_CLIENTE_VENTA;
-private String STATUS_VENTA;
-private String VENDEDOR;
-private String FECHA_VENTA ; 
-private String ID_ALTERNATIVOS ; 
-private String TOTAL_VENTA_DETALLE;
-private String AGREGAR;
-private String ESTATUS_ENTREGA;
-private String FECHA_INGRESO;
-
-private String N_ID;
-private String CVE_SAT;
-
+    private String AUXCOTIZA;
+    private String TOTAL_COTIZACION;
+    private String NO_COTIZACION;
+    private String BORRARPRODUCTO;
+    private String ID_VENTA_PRODUCTO;
+    private String NO_VENTA;
+    private String NO_PARTE_VENTA;
+    private String PRECIO_UNITARIO_VENTA;
+    private String NO_PRODUCTOVENTA;
+    private String PRECIO_FINAL_VENTA;
+    private String RFC_CLIENTE_VENTA;
+    private String STATUS_VENTA;
+    private String VENDEDOR;
+    private String FECHA_VENTA;
+    private String ID_ALTERNATIVOS;
+    private String TOTAL_VENTA_DETALLE;
+    private String AGREGAR;
+    private String ESTATUS_ENTREGA;
+    private String FECHA_INGRESO;
+    private String N_ID;
+    private String CVE_SAT;
 
     public String getN_ID() {
         return N_ID;
@@ -111,7 +103,6 @@ private String CVE_SAT;
         this.CVE_SAT = CVE_SAT;
     }
 
-
     public String getFECHA_INGRESO() {
         return FECHA_INGRESO;
     }
@@ -120,10 +111,6 @@ private String CVE_SAT;
         this.FECHA_INGRESO = FECHA_INGRESO;
     }
 
-
-
-
-
     public String getESTATUS_ENTREGA() {
         return ESTATUS_ENTREGA;
     }
@@ -131,7 +118,6 @@ private String CVE_SAT;
     public void setESTATUS_ENTREGA(String ESTATUS_ENTREGA) {
         this.ESTATUS_ENTREGA = ESTATUS_ENTREGA;
     }
-
 
     public String getTOTAL_VENTA_DETALLE() {
         return TOTAL_VENTA_DETALLE;
@@ -149,10 +135,7 @@ private String CVE_SAT;
         this.TOTAL_VENTA_DETALLE = TOTAL_VENTA_DETALLE;
     }
 
-
-
-
-private String UBICACION;
+    private String UBICACION;
 
     public String getID_ALTERNATIVOS() {
         return ID_ALTERNATIVOS;
@@ -162,8 +145,6 @@ private String UBICACION;
         this.ID_ALTERNATIVOS = ID_ALTERNATIVOS;
     }
 
-
-
     public String getUBICACION() {
         return UBICACION;
     }
@@ -171,9 +152,6 @@ private String UBICACION;
     public void setUBICACION(String UBICACION) {
         this.UBICACION = UBICACION;
     }
-
-
-
 
     public String getID_VENTA_PRODUCTO() {
         return ID_VENTA_PRODUCTO;
@@ -254,12 +232,6 @@ private String UBICACION;
     public void setFECHA_VENTA(String FECHA_VENTA) {
         this.FECHA_VENTA = FECHA_VENTA;
     }
-      
-      
-      
-      
-      
-      
 
     public String getBORRARPRODUCTO() {
         return BORRARPRODUCTO;
@@ -268,7 +240,6 @@ private String UBICACION;
     public void setBORRARPRODUCTO(String BORRARPRODUCTO) {
         this.BORRARPRODUCTO = BORRARPRODUCTO;
     }
-      
 
     public String getNO_COTIZACION() {
         return NO_COTIZACION;
@@ -277,8 +248,6 @@ private String UBICACION;
     public void setNO_COTIZACION(String NO_COTIZACION) {
         this.NO_COTIZACION = NO_COTIZACION;
     }
-      
-      
 
     public String getTOTAL_COTIZACION() {
         return TOTAL_COTIZACION;
@@ -287,8 +256,6 @@ private String UBICACION;
     public void setTOTAL_COTIZACION(String TOTAL_COTIZACION) {
         this.TOTAL_COTIZACION = TOTAL_COTIZACION;
     }
-      
-      
 
     public String getAUXCOTIZA() {
         return AUXCOTIZA;
@@ -297,7 +264,6 @@ private String UBICACION;
     public void setAUXCOTIZA(String AUXCOTIZA) {
         this.AUXCOTIZA = AUXCOTIZA;
     }
-    
 
     public String getAUXVENTA() {
         return AUXVENTA;
@@ -306,8 +272,6 @@ private String UBICACION;
     public void setAUXVENTA(String AUXVENTA) {
         this.AUXVENTA = AUXVENTA;
     }
-    
-
 
     public String getID_COTIZAPRODUCTO() {
         return ID_COTIZAPRODUCTO;
@@ -372,16 +336,6 @@ private String UBICACION;
     public void setFECHA_COTIZA(String FECHA_COTIZA) {
         this.FECHA_COTIZA = FECHA_COTIZA;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     public String getRFCCLIENTE() {
         return RFCCLIENTE;
@@ -390,9 +344,7 @@ private String UBICACION;
     public void setRFCCLIENTE(String RFCCLIENTE) {
         this.RFCCLIENTE = RFCCLIENTE;
     }
-    
-    
-    
+
     public String getAUX_RFC_CLIENTE() {
         return AUX_RFC_CLIENTE;
     }
@@ -400,9 +352,6 @@ private String UBICACION;
     public void setAUX_RFC_CLIENTE(String AUX_RFC_CLIENTE) {
         this.AUX_RFC_CLIENTE = AUX_RFC_CLIENTE;
     }
-    
-    
-    
 
     public String getTOTAL_PRODUCTO_VENTA() {
         return TOTAL_PRODUCTO_VENTA;
@@ -411,8 +360,6 @@ private String UBICACION;
     public void setTOTAL_PRODUCTO_VENTA(String TOTAL_PRODUCTO_VENTA) {
         this.TOTAL_PRODUCTO_VENTA = TOTAL_PRODUCTO_VENTA;
     }
-    
-    
 
     public String getBODEGA() {
         return BODEGA;
@@ -421,9 +368,6 @@ private String UBICACION;
     public void setBODEGA(String BODEGA) {
         this.BODEGA = BODEGA;
     }
-    
-    
-    
 
     public String getTOTAL_PARTES() {
         return TOTAL_PARTES;
@@ -440,11 +384,6 @@ private String UBICACION;
     public void setTOTAL_PRODUCTOS(String TOTAL_PRODUCTOS) {
         this.TOTAL_PRODUCTOS = TOTAL_PRODUCTOS;
     }
-    
-    
-    
-    
-    
 
     public String getID_PRODUCT() {
         return ID_PRODUCT;
@@ -509,10 +448,7 @@ private String UBICACION;
     public void setCANTIDAD_LLEGADA(String CANTIDAD_LLEGADA) {
         this.CANTIDAD_LLEGADA = CANTIDAD_LLEGADA;
     }
-    
 
-    
-    
     public String getMAX_PRODUCT() {
         return MAX_PRODUCT;
     }
@@ -536,10 +472,6 @@ private String UBICACION;
     public void setMAX_AUXPEDIDO(String MAX_AUXPEDIDO) {
         this.MAX_AUXPEDIDO = MAX_AUXPEDIDO;
     }
-    
-    
-    
-    
 
     public String getFECHA_ACTUALIZA() {
         return FECHA_ACTUALIZA;
@@ -548,16 +480,7 @@ private String UBICACION;
     public void setFECHA_ACTUALIZA(String FECHA_ACTUALIZA) {
         this.FECHA_ACTUALIZA = FECHA_ACTUALIZA;
     }
-    
-    
-    
-    
 
-   
-
-    
-    
-    
     public String getRFC_PROVEE() {
         return RFC_PROVEE;
     }
@@ -574,12 +497,6 @@ private String UBICACION;
         this.RASON_PROVEE = RASON_PROVEE;
     }
 
-  
-    
-    
-    
-    
-
     public String getID_GANANCIA() {
         return ID_GANANCIA;
     }
@@ -587,7 +504,6 @@ private String UBICACION;
     public void setID_GANANCIA(String ID_GANANCIA) {
         this.ID_GANANCIA = ID_GANANCIA;
     }
-    
 
     public String getRESALTA_CAMPO() {
         return RESALTA_CAMPO;
@@ -596,9 +512,6 @@ private String UBICACION;
     public void setRESALTA_CAMPO(String RESALTA_CAMPO) {
         this.RESALTA_CAMPO = RESALTA_CAMPO;
     }
-    
-    
-    
 
     public String getID_ALTERNATIVO() {
         return ID_ALTERNATIVO;

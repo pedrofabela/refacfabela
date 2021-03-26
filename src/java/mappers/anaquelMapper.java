@@ -5,6 +5,7 @@
  */
 package mappers;
 
+import beans.camposConBean;
 import beans.productosBean;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -13,10 +13,15 @@
             document.forma.action = accion;
             document.forma.submit();
         }
+         function buscar(accion) {
+
+            document.forma.action = accion;
+            document.forma.submit();
+        }
         
          function guardado() {
 
-         alert("Cliente gurdado");
+         
         }
          function actualiza(accion, valor) {
                 
@@ -36,6 +41,10 @@
             window.name = self.pageYOffset
                     || (document.documentElement.scrollTop + document.body.scrollTop);
         }
+        
+        
+        
+        
     </script>
 
 
@@ -73,9 +82,9 @@
                         <div class="div_sec1" id="flotante-busqueda">
                             <div class="div-busqueda">
                                  <div class="div_titulos_sec"> <h2 class="text-tit-sec">Busqueda</h2></div>
-                            <s:textfield name="camp.BUSCARCLIENTE" id="camp.BUSCARCLIENTE" placeholder="RFC ó Nombre ó Empresa" required="true"  cssClass="campoFormBusqueda" onKeyUp="this.value=this.value.toUpperCase();"/>
+                            <s:textfield name="camp.BUSCARCLIENTE" id="camp.BUSCARCLIENTE" placeholder="RFC ó Razón Social" required="true"  cssClass="campoFormBusqueda" onKeyUp="this.value=this.value.toUpperCase();"/>
                             
-                              <a href="Javascript:guarda('clientesBuscar')"><div class="boton">  Buscar  </div> </a>
+                              <a href="Javascript:buscar('clientesBuscar')"><div class="boton">  Buscar  </div> </a>
                               
                               <img src="img/maquina-busqueda.jpg" alt="Maquina" style="width: 90%; margin-top: 20px; margin-bottom: 20px;" ></img>
                             </div>
@@ -104,16 +113,16 @@
                             <s:fielderror fieldName="CampRequierers" cssClass="error" />  
                             <s:textfield name="camp.RFC_CLIENTE" id="camp.RFC_CLIENTE" placeholder="RFC" required="true" cssClass="campoForm" onKeyUp="this.value=this.value.toUpperCase();" />
                             <s:fielderror fieldName="CampRequiererfc" cssClass="error" />  
-                            <s:textfield name="camp.NOMBRE_CLIENTE" id="camp.NOMBRE_CLIENTE" placeholder="Nombre del Cliente" required="true" cssClass="campoForm" onKeyUp="this.value=this.value.toUpperCase();" />
-                            <s:fielderror fieldName="CampRequierenom" cssClass="error" />  
+                         <!--   <s:textfield name="camp.NOMBRE_CLIENTE" id="camp.NOMBRE_CLIENTE" placeholder="Nombre del Cliente" required="true" cssClass="campoForm" onKeyUp="this.value=this.value.toUpperCase();" />
+                            <s:fielderror fieldName="CampRequierenom" cssClass="error" />  -->
 
                             <s:textfield name="camp.DIRECCION_CLIENTE" id="camp.DIRECCION_CLIENTE" placeholder="Dirección" required="true" cssClass="campoForm" onKeyUp="this.value=this.value.toUpperCase();"/>
                             <s:fielderror fieldName="CampRequieredir" cssClass="error" />  
-                            <s:textfield name="camp.TELEFONO_CLIENTE" id="camp.TELEFONO_CLIENTE" placeholder="Teléfono" required="true" cssClass="campoForm" onKeyUp="this.value=this.value.toUpperCase();"/>
+                            <s:textfield name="camp.TELEFONO_CLIENTE" id="camp.TELEFONO_CLIENTE" placeholder="Teléfono" maxLength="10" required="true" cssClass="campoForm" onKeyUp="this.value=this.value.toUpperCase();"/>
                             <s:fielderror fieldName="CampRequieretel" cssClass="error" />
-                            <s:textfield name="camp.EMPRESA_CLIENTE" id="camp.EMPRESA_CLIENTE" placeholder="Empresa" required="true" cssClass="campoForm" onKeyUp="this.value=this.value.toUpperCase();"/>
-                              <s:fielderror fieldName="CampRequiereemp" cssClass="error" />
-                            <s:textfield name="camp.CORREO_CLIENTE" id="camp.CORREO_CLIENTE" placeholder="Correo" required="true" cssClass="campoForm" onKeyUp="this.value=this.value.toUpperCase();"/>
+                           <!-- <s:textfield name="camp.EMPRESA_CLIENTE" id="camp.EMPRESA_CLIENTE" placeholder="Empresa" required="true" cssClass="campoForm" onKeyUp="this.value=this.value.toUpperCase();"/>
+                              <s:fielderror fieldName="CampRequiereemp" cssClass="error" />-->
+                            <s:textfield name="camp.CORREO_CLIENTE" id="camp.CORREO_CLIENTE" placeholder="Correo" required="true" cssClass="campoForm" />
                             <s:fielderror fieldName="CampRequierecor" cssClass="error" />
                             <s:if test="banCliente">
                                 <a href="Javascript:guarda('clientesGuardar')" onclick="guardado()"><div class="boton">  Ingresar   </div> </a>
@@ -121,6 +130,8 @@
                              <s:if test="banClienteActualiza">
                             <a href="Javascript:guarda('actualizacliente')"><div class="boton">  Actualizar   </div> </a>
                             </s:if>
+                            
+                            <div style="width: 100%; text-align: center; color: green;"> <s:fielderror fieldName="mensaje"  /></div>
 
                         </div>
 
@@ -135,26 +146,28 @@
 
                                 <div class="div_form_cliente">
                                     <div id="scroltabla-cliente">
-                                        <table id="customers">
+                                        <table id="customers" >
                                             <thead>
-                                                <th>NP</th>
-                                                <th>RFC</th>
-                                                <th>Nombre del Cliente</th>
-                                                <th>Empresa</th>
-
-                                                <th>Modificar</th>
-                                                <th>Eliminar</th>
+                                                <th style="width:5%;">NP</th>
+                                                <th style="width:10%;">RFC</th>
+                                                <th style="width:20%;" >Razón Social</th>
+                                                <th style="width:20%;">Dirección</th>                                               
+                                                 <th style="width:10%;">Correo</th>                                           
+                                                <th style="width:10%;">Modificar</th>
+                                                <th style="width:10%;">Eliminar</th>
                                             </thead>
 
                                             <s:iterator value="ListaClientes" id="ListaClientes" status="stat" >
                                                 <tr>
-                                                     <td id="centrar-dato"><s:property value="#stat.count" /></td>
-                                                    <td><s:property value="RFC_CLIENT" /></td>
-                                                    <td><s:property value="NOMBRE_CLIENT" /></td>
-                                                    <td><s:property value="EMPRESA" /></td>
+                                                     <td style="width:5%;"id="centrar-dato"><s:property value="#stat.count" /></td>
+                                                    <td style="width:5%;"><s:property value="RFC_CLIENT" /></td>
+                                                    <td style="width:5%;"><s:property value="RASON_CLIENT" /></td>
+                                                    <td style="width:5%;"><s:property value="DIRECCION_CLIENT" /></td>
+                                                   
+                                                    <td style="width:5%;"><s:property value="CORREO_CLIENT" /></td>
 
-                                                    <td style="min-width: 50px; max-width: 50px;"><div class="img-pos-eliact"><a href="Javascript:actualiza('llanacliente','<s:property value="RFC_CLIENT" />')"><img src="img/iconModificar.png" alt="Modificar"></img></a></div> </td>
-                                                    <td style="min-width: 50px; max-width: 50px;">  <div class="img-pos-eliact" ><a href="Javascript:actualiza('clientesBorrar','<s:property value="RFC_CLIENT" />')"><img src="img/iconEliminar.png" alt="Eliminar"></img></a></div></td>
+                                                    <td  style="width:5%; text-align: center;" ><div class="img-pos-eliact"><a href="Javascript:actualiza('llanacliente','<s:property value="RFC_CLIENT" />')"><img src="img/iconModificar.png" alt="Modificar"></img></a></div> </td>
+                                                    <td  style="width:5%; text-align: center;" >  <div class="img-pos-eliact" ><a href="Javascript:actualiza('clientesBorrar','<s:property value="RFC_CLIENT" />')"><img src="img/iconEliminar.png" alt="Eliminar"></img></a></div></td>
 
 
                                                 </tr>
@@ -205,10 +218,10 @@
                 <s:hidden  name = "modulosAUXP[%{#stat.index}].ACCION" id="ACCION"></s:hidden>
             </s:iterator>
                  <s:iterator value="ListaClientes" id="ListaClientes" status="stat">                        
-                <s:hidden  name = "ListaClientes[%{#stat.index}].RFC_CLIENT" id="RFC_CLIENT"></s:hidden>
-                <s:hidden  name = "ListaClientes[%{#stat.index}].NOMBRE_CLIENT" id="NOMBRE_CLIENT"></s:hidden>
-                <s:hidden  name = "ListaClientes[%{#stat.index}].EMPRESA" id="EMPRESA"></s:hidden>
-               
+                <s:hidden  name = "ListaClientes[%{#stat.index}].RFC_CLIENT" id="RFC_CLIENT"></s:hidden>                          
+                <s:hidden  name = "ListaClientes[%{#stat.index}].RASON_CLIENT" id="RASON_CLIENT"></s:hidden>
+                <s:hidden  name = "ListaClientes[%{#stat.index}].DIRECCION_CLIENT" id="DIRECCION_CLIENT"></s:hidden>  
+                <s:hidden  name = "ListaClientes[%{#stat.index}].CORREO_CLIENT" id="CORREO_CLIENT"></s:hidden>
             </s:iterator>
  
           

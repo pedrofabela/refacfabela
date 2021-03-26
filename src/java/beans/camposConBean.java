@@ -126,7 +126,114 @@ public class camposConBean {
     private String USOCFDI;
     private String FORMAPAGO;
     private String FOLIOSRESTANTES;
+    
+    private float TOTAL_DEUDA ;
+    private float TOTAL_APORTACIONES_DEUDA ;
+    private float SALDO_DEUDA ;
+    private String AVANCE_DEUDA;
+    
+     private float TOTAL_DEUDA_GENERAL ;
+    private float TOTAL_APORTACIONES_DEUDA_GENERAL ;
+    private float SALDO_DEUDA_GENERAL ;
+    private String ESTATUS;
+    public String N_ID;
+    public String APORTACION;
+    public String FECHA_APORTACION;
 
+    
+    
+    public String getN_ID() {
+        return N_ID;
+    }
+
+    public void setN_ID(String N_ID) {
+        this.N_ID = N_ID;
+    }
+
+    public String getAPORTACION() {
+        return APORTACION;
+    }
+
+    public void setAPORTACION(String APORTACION) {
+        this.APORTACION = APORTACION;
+    }
+
+    public String getFECHA_APORTACION() {
+        return FECHA_APORTACION;
+    }
+
+    public void setFECHA_APORTACION(String FECHA_APORTACION) {
+        this.FECHA_APORTACION = FECHA_APORTACION;
+    }
+
+    
+    
+    public String getESTATUS() {
+        return ESTATUS;
+    }
+
+    public void setESTATUS(String ESTATUS) {
+        this.ESTATUS = ESTATUS;
+    }
+    
+
+    public float getTOTAL_DEUDA_GENERAL() {
+        return TOTAL_DEUDA_GENERAL;
+    }
+
+    public void setTOTAL_DEUDA_GENERAL(float TOTAL_DEUDA_GENERAL) {
+        this.TOTAL_DEUDA_GENERAL = TOTAL_DEUDA_GENERAL;
+    }
+
+    public float getTOTAL_APORTACIONES_DEUDA_GENERAL() {
+        return TOTAL_APORTACIONES_DEUDA_GENERAL;
+    }
+
+    public void setTOTAL_APORTACIONES_DEUDA_GENERAL(float TOTAL_APORTACIONES_DEUDA_GENERAL) {
+        this.TOTAL_APORTACIONES_DEUDA_GENERAL = TOTAL_APORTACIONES_DEUDA_GENERAL;
+    }
+
+    public float getSALDO_DEUDA_GENERAL() {
+        return SALDO_DEUDA_GENERAL;
+    }
+
+    public void setSALDO_DEUDA_GENERAL(float SALDO_DEUDA_GENERAL) {
+        this.SALDO_DEUDA_GENERAL = SALDO_DEUDA_GENERAL;
+    }
+    
+    
+
+    public float getTOTAL_DEUDA() {
+        return TOTAL_DEUDA;
+    }
+
+    public void setTOTAL_DEUDA(float TOTAL_DEUDA) {
+        this.TOTAL_DEUDA = TOTAL_DEUDA;
+    }
+
+    public float getTOTAL_APORTACIONES_DEUDA() {
+        return TOTAL_APORTACIONES_DEUDA;
+    }
+
+    public void setTOTAL_APORTACIONES_DEUDA(float TOTAL_APORTACIONES_DEUDA) {
+        this.TOTAL_APORTACIONES_DEUDA = TOTAL_APORTACIONES_DEUDA;
+    }
+
+    public float getSALDO_DEUDA() {
+        return SALDO_DEUDA;
+    }
+
+    public void setSALDO_DEUDA(float SALDO_DEUDA) {
+        this.SALDO_DEUDA = SALDO_DEUDA;
+    }
+
+    public String getAVANCE_DEUDA() {
+        return AVANCE_DEUDA;
+    }
+
+    public void setAVANCE_DEUDA(String AVANCE_DEUDA) {
+        this.AVANCE_DEUDA = AVANCE_DEUDA;
+    }
     
     
     

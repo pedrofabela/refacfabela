@@ -12,6 +12,7 @@ import beans.ImpuestoBean;
 import beans.camposConBean;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import utilidades.ConstantesGenerales;
 
 /**
@@ -47,8 +48,8 @@ public class Transformar {
             cabeceraXmlBean.setRegimenFiscal(ConstantesGenerales.regimenFiscal);
             cabeceraXmlBean.setUsoCFDI(camp.getUSOCFDI());
             cabeceraXmlBean.setNombreReceptor(camp.getRAZONSOCIAL());
-            cabeceraXmlBean.setRfcReceptor(ConstantesGenerales.rfcReceptor);// cambiar por rfc de camp 
-            cabeceraXmlBean.setEmailReceptor(ConstantesGenerales.emailprueba);// cambiar por email camp
+            cabeceraXmlBean.setRfcReceptor(camp.getRFC_CLIENTE());// cambiar por rfc de camp 
+            cabeceraXmlBean.setEmailReceptor(camp.getCORREO_CLIENTE());// cambiar por email camp
         }
 
         return cabeceraXmlBean;
@@ -64,7 +65,7 @@ public class Transformar {
             ConceptoXmlBean conceptoXmlBean = new ConceptoXmlBean();
             conceptoXmlBean.setClaveUnidad(ConstantesGenerales.claveUnidad);
             conceptoXmlBean.setClaveProdServ(lista.get(i).getCVE_SAT());
-            conceptoXmlBean.setNoIdentificacion(lista.get(i).getNO_PARTE());
+            conceptoXmlBean.setNoIdentificacion(String.valueOf(noIdentificador()));
             conceptoXmlBean.setCantidad(lista.get(i).getCANTIDAD().toString());
             conceptoXmlBean.setUnidad(lista.get(i).getUNIDADMEDIDA());
             conceptoXmlBean.setDescripcion(lista.get(i).getPRODUCTO());
@@ -80,6 +81,13 @@ public class Transformar {
 
         return listaConcepto;
 
+    }
+    
+    public int noIdentificador(){
+         Random r = new Random();
+        int valorDado = r.nextInt(10000000)+1;  // Entre 0 y 5, más 1.
+       
+        return valorDado;
     }
 
     public ImpuestoBean obtenerImpuestoTotal(List<FacturaBean> lista) {

@@ -35,9 +35,9 @@ public class OracleDAOFactory implements DAOFactory {
     private PreparedStatement pstmt;
     
    
-     /// PRODUCCION
+     /*// PRODUCCION
     private String username = "REFACFAB";	
-	private String url = "jdbc:oracle:thin:@localhost:1521:xe";	
+	private String url = "jdbc:oracle:thin:@192.168.0.4:1521:xe";	
     private String password = "fabela041287p"; 
    	//*/
     
@@ -47,9 +47,9 @@ public class OracleDAOFactory implements DAOFactory {
     private String password = "fabela041287p"; 
 	//*/
     
-     /*/DESARROLLO
+     // DESARROLLO
     private String username = "REFACFAB";	
-    private String url = "jdbc:oracle:thin:@192.168.3.47:1521:xe";	
+    private String url = "jdbc:oracle:thin:@192.168.3.55:1521:xe";	
     private String password = "fabela041287p"; 
 	//*/
     
@@ -886,7 +886,13 @@ public class OracleDAOFactory implements DAOFactory {
 				}else if(obj.getTipoDato().toUpperCase().contains("INT")){
 					this.pstmt.setInt(posicion, (Integer) obj.getValorCampo());
 					Constantes.enviaMensajeConsola("pstmt INT["+posicion+"]--->"+obj.getValorCampo().toString());
-				}else if(obj.getTipoDato().toUpperCase().contains("SECUENCIA")){
+                                        
+				}else if(obj.getTipoDato().toUpperCase().contains("FLOAT")){
+					this.pstmt.setFloat(posicion, (Float) obj.getValorCampo());
+					Constantes.enviaMensajeConsola("pstmt FLOAT["+posicion+"]--->"+obj.getValorCampo().toString());
+                                        
+				}
+                                else if(obj.getTipoDato().toUpperCase().contains("SECUENCIA")){
 					//this.pstmt.setInt(posicion, 0);
 					Constantes.enviaMensajeConsola("pstmt SECUENCIA["+posicion+"]--->"+obj.getValorCampo().toString());
 					Constantes.enviaMensajeConsola("----- NO SETEA TIPO A PSTMT -----");

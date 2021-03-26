@@ -5,4 +5,9 @@
     <system systemId="http://app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc?xsd=xsd1" uri="src/conf/xml-resources/web-service-references/WSCFDI33_1/wsdl/app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc.xsd_xsd1.xsd"/>
     <system systemId="http://app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc?xsd=xsd2" uri="src/conf/xml-resources/web-service-references/WSCFDI33_1/wsdl/app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc.xsd_xsd2.xsd"/>
     <system systemId="http://app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc?xsd=xsd3" uri="src/conf/xml-resources/web-service-references/WSCFDI33_1/wsdl/app.foliosdigitalespac.com/WSTimbrado33Test/WSCFDI33.svc.xsd_xsd3.xsd"/>
+    <system systemId="https://www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc?WSDL" uri="src/conf/xml-resources/web-service-references/WSCFDI33/wsdl/www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc.wsdl"/>
+    <system systemId="http://www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc?xsd=xsd0" uri="src/conf/xml-resources/web-service-references/WSCFDI33/wsdl/www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc.xsd_xsd0.xsd"/>
+    <system systemId="http://www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc?xsd=xsd1" uri="src/conf/xml-resources/web-service-references/WSCFDI33/wsdl/www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc.xsd_xsd1.xsd"/>
+    <system systemId="http://www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc?xsd=xsd2" uri="src/conf/xml-resources/web-service-references/WSCFDI33/wsdl/www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc.xsd_xsd2.xsd"/>
+    <system systemId="http://www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc?xsd=xsd3" uri="src/conf/xml-resources/web-service-references/WSCFDI33/wsdl/www.foliosdigitalespac.com/WSTimbrado33/WSCFDI33.svc.xsd_xsd3.xsd"/>
 </catalog>

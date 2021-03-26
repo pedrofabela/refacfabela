@@ -11,6 +11,17 @@ private String CORREO_CLIENT;
 private String EMPRESA;
 private String RESP_REGISTRO;
 private String RASON_CLIENT;
+private String VALIDADO;
+
+    public String getVALIDADO() {
+        return VALIDADO;
+    }
+
+    public void setVALIDADO(String VALIDADO) {
+        this.VALIDADO = VALIDADO;
+    }
+
+
 
     public String getRASON_CLIENT() {
         return RASON_CLIENT;
